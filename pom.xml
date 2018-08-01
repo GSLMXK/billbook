@@ -37,27 +37,23 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <!-- 引入freemarker包 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
         <!-- 使用log4j2，该包paren标签中已经依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
-
+        <!--springBoot工程实现热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
-        <!-- 引入freemarker包 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
+
 
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -76,6 +72,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork><!--热部署注意要修改这里-->
+                </configuration>
             </plugin>
         </plugins>
     </build>
