@@ -9,7 +9,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class BaseController {
     private final String ERROR_URL = "admin/shopCart/list";
     @RequestMapping("/showUser/error")
-    public String selectUser (@PathVariable int id){
+    public String selectUser (){
         return null;
+    }
+    @RequestMapping("/index")
+    public String toIndex (){
+        return "index";
+    }
+
+    @RequestMapping("/top")
+    public String loadHead (){
+        return "index";
     }
 }
