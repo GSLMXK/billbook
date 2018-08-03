@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class BaseController {
+
     private final String ERROR_URL = "admin/shopCart/list";
     @RequestMapping("/showUser/error")
     public String selectUser (){
@@ -14,11 +15,27 @@ public class BaseController {
     }
     @RequestMapping("/index")
     public String toIndex (){
-        return "index";
+        return "admin/index";
     }
 
-    @RequestMapping("/top")
-    public String loadHead (){
-        return "index";
+    @RequestMapping("/top.jsp")
+    public String loadTop (){
+        return "admin/top";
     }
+
+    @RequestMapping("/main.jsp")
+    public String loadMain (){
+        return "admin/main";
+    }
+
+    @RequestMapping("/left.jsp")
+    public String loadLeft (){
+        return "admin/left";
+    }
+
+    @RequestMapping("/foot.jsp")
+    public String loadFoot (){
+        return "admin/foot";
+    }
+
 }
