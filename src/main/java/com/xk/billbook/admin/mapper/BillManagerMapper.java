@@ -1,11 +1,15 @@
 package com.xk.billbook.admin.mapper;
 
-import com.xk.billbook.admin.model.User;
+import com.xk.billbook.admin.common.base.mapper.BaseMapper;
+import com.xk.billbook.admin.model.Bill;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface BillManagerMapper {
-    @Select("SELECT * FROM bb_user WHERE id = #{id}")
-    User selectUser(int id);
+public interface BillManagerMapper extends BaseMapper<Bill> {
+    @Select("SELECT * FROM ${table} WHERE creator_id = #{creator_id}")
+    List<Bill> findAll(@Param("table")String table, @Param("creator_id")int creatorId);
 }
