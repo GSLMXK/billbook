@@ -2,6 +2,8 @@ package com.xk.billbook.admin.model;
 
 import com.xk.billbook.admin.common.base.model.BaseModel;
 
+import java.util.Date;
+
 /**
  * 账单实体
  * xiekuang
@@ -12,6 +14,7 @@ public class Bill extends BaseModel {
     private String money;
     private String description;
     private Integer creatorId;
+    private Date billDate;
 
     public String getBillTypeId() {
         return billTypeId;
@@ -43,5 +46,21 @@ public class Bill extends BaseModel {
 
     public void setCreatorId(Integer creatorId) {
         this.creatorId = creatorId;
+    }
+
+    public Date getBillDate() {
+        return billDate;
+    }
+
+    public void setBillDate(Date billDate) {
+        this.billDate = billDate;
+    }
+
+    public String getColumns() {
+        return "id,name,billType_id,money,description,creator_id,bill_date";
+    }
+
+    public String getValues() {
+        return this.getId() + "," + this.getName() + "," + this.getBillTypeId() + "," + this.getMoney() + "," + this.getDescription() + "," + this.getCreatorId() + "," + this.getBillDate();
     }
 }

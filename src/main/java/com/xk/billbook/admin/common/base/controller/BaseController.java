@@ -17,6 +17,10 @@ public class BaseController<E> {
 
     private final String ERROR_URL = "admin/shopCart/error";
 
+    //返回错误页
+    public String toError(){
+        return "admin/error";
+    }
 
     @RequestMapping("/index")
     public String toIndex (){

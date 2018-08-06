@@ -8,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 账单管理控制类
@@ -27,10 +30,28 @@ public class BillManagerController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public String findAll (){
+    public String findAll (Map<String, Object> map){
         int id = 1;
-        List<Bill> list = billmgrService.findAll(id);
-        
+        List<Bill> billList = billmgrService.findAll(id);
+        map.put("billList", billList);
         return Base_URL+"list";
+    }
+
+    @RequestMapping("/add")
+    public String toAddPage (){
+        return Base_URL+"add";
+    }
+
+    @RequestMapping("/edit")
+    public String toEditPage (){
+        return "edit";
+    }
+
+    @RequestMapping("/save")
+    public String save (Bill bill){
+        if(billmgrService.insertBill(bill)){
+            return "list";
+        }
+        return toError();
     }
 }

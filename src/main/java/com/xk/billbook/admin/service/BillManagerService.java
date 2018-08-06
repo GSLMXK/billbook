@@ -20,8 +20,16 @@ public class BillManagerService extends BaseService<Bill> {
         return (Bill) billMapper.findById(TABLE,id);
     }
 
-    //
+    //查询当前用户的全部账单
     public List findAll(int id){
-        return  billMapper.findAll(TABLE,id);
+        String selectParm = "id,name,billType_id billTypeId,money,creator_id creatorId,bill_date billDate";
+        String condition = "creator_id = "+id;
+        return  billMapper.findBySql(TABLE,selectParm,condition);
     }
+
+    //插入新账单
+    public Boolean insertBill(Bill bill){
+        return  billMapper.insertBySql(TABLE,bill.getColumns(),bill.getValues());
+    }
+
 }
