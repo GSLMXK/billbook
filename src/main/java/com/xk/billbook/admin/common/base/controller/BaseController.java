@@ -1,7 +1,7 @@
 package com.xk.billbook.admin.common.base.controller;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+/*import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;*/
 import com.xk.billbook.admin.common.base.utils.TestPage;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
@@ -47,8 +47,8 @@ public class BaseController<E> {
         return "admin/foot";
     }
 
-    @Bean
-    public PageHelper pageHelper() {
+ /*      @Bean
+ public PageHelper pageHelper() {
         PageHelper pageHelper = new PageHelper();
         Properties p = new Properties();
         p.setProperty("offsetAsPageNum", "true");
@@ -59,7 +59,7 @@ public class BaseController<E> {
         p.setProperty("pageSizeZero", "true");
         pageHelper.setProperties(p);
         return pageHelper;
-    }
+    }*/
 
 //    public PageInfo selectAll() {
 //        TestPage TestPage = new TestPage();

@@ -1,6 +1,6 @@
 package com.xk.billbook.admin.common.base.utils;
 
-import com.github.pagehelper.PageHelper;
+/*import com.github.pagehelper.PageHelper;*/
 
 import java.io.Serializable;
 
@@ -39,11 +39,11 @@ public abstract class AbstractPageForm<T extends AbstractPageForm<T>> implements
      * @Description 启用分页
      * @return
      */
-    @SuppressWarnings("unchecked")
-    public final T enablePaging() {
+/*    @SuppressWarnings("unchecked")*/
+/*    public final T enablePaging() {
         PageHelper.startPage(pageNum, pageSize);
         return (T) this;
-    }
+    }*/
 
 
 }

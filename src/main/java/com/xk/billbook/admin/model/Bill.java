@@ -1,5 +1,6 @@
 package com.xk.billbook.admin.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xk.billbook.admin.common.base.model.BaseModel;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ public class Bill extends BaseModel {
     private String money;
     private String description;
     private Integer creatorId;
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date billDate;
 
     public String getBillTypeId() {
@@ -61,6 +63,6 @@ public class Bill extends BaseModel {
     }
 
     public String getValues() {
-        return this.getId() + "," + this.getName() + "," + this.getBillTypeId() + "," + this.getMoney() + "," + this.getDescription() + "," + this.getCreatorId() + "," + this.getBillDate();
+        return this.getId() + ",'" + this.getName() + "'," + this.getBillTypeId() + "," + this.getMoney() + ",'" + this.getDescription() + "'," + this.getCreatorId() + ",DATE_FORMAT('" + this.getBillDate()+"','%Y-%m-%d')";
     }
 }
