@@ -28,7 +28,7 @@ public class BillManagerService extends BaseService<Bill> {
     }
 
     //插入新账单
-    public Boolean insertBill(Bill bill){
+    public Integer insertBill(Bill bill){
         return  billMapper.insertBySql(TABLE,bill.getColumns(),bill.getValues());
     }
 

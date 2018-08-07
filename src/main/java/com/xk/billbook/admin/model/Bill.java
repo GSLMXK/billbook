@@ -3,6 +3,7 @@ package com.xk.billbook.admin.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.xk.billbook.admin.common.base.model.BaseModel;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -12,10 +13,9 @@ import java.util.Date;
  */
 public class Bill extends BaseModel {
     private String billTypeId;
-    private String money;
+    private BigDecimal money;
     private String description;
     private Integer creatorId;
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date billDate;
 
     public String getBillTypeId() {
@@ -26,11 +26,11 @@ public class Bill extends BaseModel {
         this.billTypeId = billTypeId;
     }
 
-    public String getMoney() {
+    public BigDecimal getMoney() {
         return money;
     }
 
-    public void setMoney(String money) {
+    public void setMoney(BigDecimal money) {
         this.money = money;
     }
 
@@ -63,6 +63,6 @@ public class Bill extends BaseModel {
     }
 
     public String getValues() {
-        return this.getId() + ",'" + this.getName() + "'," + this.getBillTypeId() + "," + this.getMoney() + ",'" + this.getDescription() + "'," + this.getCreatorId() + ",DATE_FORMAT('" + this.getBillDate()+"','%Y-%m-%d')";
+        return this.getId() + ",'" + this.getName() + "'," + this.getBillTypeId() + "," + this.getMoney() + ",'" + this.getDescription() + "'," + this.getCreatorId() + ",'" + this.getBillDate()+"'";
     }
 }

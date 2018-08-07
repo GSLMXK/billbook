@@ -29,7 +29,9 @@ public class BillbookApplication {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                return date;
+                String str = sdf.format(date);
+                Date dateFmt = java.sql.Date.valueOf(str);
+                return dateFmt;
             }
         };
     }

@@ -49,8 +49,11 @@ public class BillManagerController extends BaseController {
 
     @RequestMapping("/save")
     public String save (Bill bill){
-        if(billmgrService.insertBill(bill)){
-            return "list";
+        Integer result = 0;
+        result = billmgrService.insertBill(bill);
+        if(result!=null&&result>0){
+            Map<String, Object> map = null;
+            return findAll(map);
         }
         return toError();
     }

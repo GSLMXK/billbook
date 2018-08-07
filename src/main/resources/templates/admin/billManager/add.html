@@ -19,6 +19,7 @@
 
     <div class="am-g">
         <form class="am-form" action="save" >
+            <input type="hidden" name="id" value="" class="am-input-sm">
             <div class="am-g am-margin-top">
                 <div class="am-u-sm-2 am-text-right">
                     账单名
@@ -38,6 +39,10 @@
                         <select name="billTypeId">
                             <option value="">请选择&nbsp;&nbsp;&nbsp;</option>
                             <option value="1">食物</option>
+                            <option value="2">小吃</option>
+                            <option value="3">水果</option>
+                            <option value="4">早餐</option>
+                            <option value="5">晚餐</option>
                         </select>
                         <!--<label class="am-btn am-btn-default am-btn-xs">
                             <input type="radio" name="options" value="0" id="option1"> 出账
