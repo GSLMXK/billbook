@@ -1,14 +1,19 @@
 <#include "/admin/head.html">
-<script>
-    window.onload = function () {
-        dyniframesize();
-    };
-</script>
+<style>
+    body{
+        margin:0;
+        padding:0;
+        overflow:hidden;
+    }
+</style>
 
-<frameset rows="5.4%,89.6%,5%" frameborder="0" border="0" framespacing="0">
+<#include "/admin/top.html">
+<#include "/admin/main.html">
+
+<!--<frameset rows="5.4%,89.6%,5%" frameborder="0" border="0" framespacing="0">
     <frame src="top.jsp" name="topFrame" id="topFrame"/>
     <frame src="main.jsp" name="mainFrame" id="mainFrame" />
     <frame src="foot.jsp" name="footFrame" id="footFrame" />
 </frameset>
-<noframes><body></body></noframes>
+<noframes><body></body></noframes>-->
 </html>

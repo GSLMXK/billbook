@@ -57,7 +57,7 @@ public class BillManagerController extends BaseController {
         Integer result = 0;
         result = billmgrService.insertBill(bill);
         if(result!=null&&result>0){
-            return "redirect:/list";
+            return "redirect:/BillMgr/list";
         }
         return toError();
     }

@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>${site.name}Shop Administrator's Control Panel - powered by ${site.name}Shop</title>
-    <link type="image/x-icon" rel="icon" href="${base}/${ICO!}"/>
-    <style type="text/css">
-        html{height:100%; overflow:hidden;}
-        body{height:100%;}
-    </style>
-</head>
-<frameset cols="14%,86%" frameborder="0" border="0" framespacing="0">
+<script>
+    function changeFrameHeight(){
+        var ifm= document.getElementById("rightFrame");
+        ifm.height=document.documentElement.clientHeight;
+        var leftWidth = $(".admin-sidebar").width();
+        ifm.width=document.documentElement.clientWidth-leftWidth-1;
+    }
+
+    window.onresize=function(){
+        changeFrameHeight();
+    }
+    $(function(){changeFrameHeight();});
+</script>
+<#include "/admin/left.html">
+<iframe src="/Report/homePage" name="rightFrame" frameborder="0" noresize="noresize" id="rightFrame" ></iframe>
+<#include "/admin/foot.html">
+<!--<frameset cols="14%,86%" frameborder="0" border="0" framespacing="0">
     <frame src="left.jsp" name="leftFrame" noresize="noresize" id="leftFrame" />
     <frame src="/Report/homePage" name="rightFrame" noresize="noresize" id="rightFrame" />
 </frameset>
-<noframes><body></body></noframes>
+<noframes><body></body></noframes>-->
 </html>
