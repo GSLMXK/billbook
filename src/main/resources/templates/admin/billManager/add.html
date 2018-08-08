@@ -2,9 +2,8 @@
 <script>
     $(function () {
         $('#billDate').datetimepicker({
-            showSecond: true,
-            showMillisec: true,
-            timeFormat: 'hh:mm:ss:l'
+            minView: 'month',
+            format: 'yyyy-mm-dd'
         });
     });
 
@@ -38,11 +37,9 @@
                     <div class="am-btn-group" data-am-button>
                         <select name="billTypeId">
                             <option value="">请选择&nbsp;&nbsp;&nbsp;</option>
-                            <option value="1">食物</option>
-                            <option value="2">小吃</option>
-                            <option value="3">水果</option>
-                            <option value="4">早餐</option>
-                            <option value="5">晚餐</option>
+                            <#list typeList as type>
+                                <option value=${type.name}>${type.name}</option>
+                            </#list>
                         </select>
                         <!--<label class="am-btn am-btn-default am-btn-xs">
                             <input type="radio" name="options" value="0" id="option1"> 出账
@@ -68,8 +65,8 @@
                     账单时间
                 </div>
                 <div class="am-u-sm-10">
-                        <input type="text" name="billDate" />
-                        <p><input type="text" class="am-form-field" placeholder="日历组件" data-am-datepicker="{theme: 'success'}" readonly/></p>
+                        <!--<input type="text" name="billDate" />-->
+                        <p><input type="text" id="billDate" name="billDate" class="am-form-field" readonly/></p>
                 </div>
             </div>
 

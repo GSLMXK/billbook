@@ -14,6 +14,9 @@ public interface BaseMapper<E> {
     @Select("SELECT * FROM ${table} WHERE id = #{id}")
     E findById(@Param("table")String table, @Param("id")int id);
 
+    @Select("SELECT * FROM ${table}")
+    List<E> findByList(@Param("table")String table);
+
     @Select("SELECT ${selectParm} FROM ${table} WHERE ${condition}")
     List<E>  findBySql(@Param("table")String table, @Param("selectParm")String selectParm, @Param("condition")String condition);
 

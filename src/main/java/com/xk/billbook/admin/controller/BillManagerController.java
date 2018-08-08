@@ -3,6 +3,7 @@ package com.xk.billbook.admin.controller;
 import com.xk.billbook.admin.common.base.controller.BaseController;
 import com.xk.billbook.admin.model.Bill;
 import com.xk.billbook.admin.service.BillManagerService;
+import com.xk.billbook.admin.service.BillTypeMgrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,8 @@ public class BillManagerController extends BaseController {
     private final String Base_URL = "admin/billManager/";
     @Autowired
     BillManagerService  billmgrService;
+    @Autowired
+    BillTypeMgrService billTypeMgrService;
     @RequestMapping("/{id}")
     public Bill findById (@PathVariable int id){
         return (Bill)billmgrService.findById(id);
@@ -38,7 +41,9 @@ public class BillManagerController extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String toAddPage (){
+    public String toAddPage (Map<String, Object> map){
+        List typeList = billTypeMgrService.findByList();
+        map.put("typeList", typeList);
         return Base_URL+"add";
     }
 
@@ -52,9 +57,10 @@ public class BillManagerController extends BaseController {
         Integer result = 0;
         result = billmgrService.insertBill(bill);
         if(result!=null&&result>0){
-            Map<String, Object> map = null;
-            return findAll(map);
+            return "redirect:/list";
         }
         return toError();
     }
+
+
 }
