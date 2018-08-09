@@ -60,14 +60,14 @@
                             <td><input type="checkbox"/></td>
                             <td>${bill_index+1}</td>
                             <td><a href="#">${bill.name}</a></td>
-                            <td>${bill.billTypeId}</td>
+                            <td>${bill.typeName}</td>
                             <td>${bill.money}</td>
-                            <td>${bill.creatorId}</td>
+                            <td>${bill.creatorName}</td>
                             <td>${bill.billDate?string('yyyy-MM-dd')}</td>
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                        <button onclick="edit(${bill.id})" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </button>
                                         <button class="am-btn am-btn-default am-btn-xs am-text-danger"><span

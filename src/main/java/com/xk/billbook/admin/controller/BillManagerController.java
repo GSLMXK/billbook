@@ -35,7 +35,7 @@ public class BillManagerController extends BaseController {
     @RequestMapping("/list")
     public String findAll (Map<String, Object> map){
         int id = 1;
-        List<Bill> billList = billmgrService.findAll(id);
+        List<Map<String,Object>> billList = billmgrService.findAll(id);
         map.put("billList", billList);
         return Base_URL+"list";
     }
@@ -48,8 +48,13 @@ public class BillManagerController extends BaseController {
     }
 
     @RequestMapping("/edit")
-    public String toEditPage (){
-        return "edit";
+    public String toEditPage (Map<String, Object> map){
+        Integer editId = Integer.valueOf((String) map.get("bill_id"));
+        Bill bill = billmgrService.findById(editId);
+        List typeList = billTypeMgrService.findByList();
+        map.put("typeList", typeList);
+        map.put("bill", bill);
+        return Base_URL+"edit";
     }
 
     @RequestMapping("/save")
