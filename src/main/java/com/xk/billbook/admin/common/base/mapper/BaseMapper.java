@@ -1,9 +1,6 @@
 package com.xk.billbook.admin.common.base.mapper;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,8 +9,8 @@ import java.util.Map;
 @Repository
 public interface BaseMapper<E> {
 
-    @Select("SELECT * FROM ${table} WHERE id = #{id}")
-    E findById(@Param("table")String table, @Param("id")int id);
+    @Select("SELECT ${columns} FROM ${table} WHERE id = #{id}")
+    E findById(@Param("columns")String colums,@Param("table")String table, @Param("id")int id);
 
     @Select("SELECT * FROM ${table}")
     List<E> findByList(@Param("table")String table);
@@ -31,7 +28,18 @@ public interface BaseMapper<E> {
     @Select("${sql}")
     List<E>  findBySql(@Param("sql")String sql);
 
+    @Select("SELECT count(1) FROM ${table} WHERE ${condition}")
+    Integer countList(@Param("table")String table, @Param("condition")String condition);
+
     @Insert("insert into ${table} (${columns}) values( ${values} )")
     Integer insertByParm(@Param("table")String table, @Param("columns")String colums, @Param("values")String values);
 
+    @Delete("DELETE FROM ${table} WHERE id =#{id}")
+    Integer delById(@Param("table")String table, @Param("id")int id);
+
+    @Delete("DELETE FROM ${table} WHERE id in ( #{ids} )")
+    Integer delByIds(@Param("table")String table, @Param("ids")String ids);
+
+    @Update("UPDATE ${table} SET ${values} WHERE id=#{id}")
+    int updateEntity(@Param("table")String table,@Param("values")String values, @Param("id")Integer id);
 }

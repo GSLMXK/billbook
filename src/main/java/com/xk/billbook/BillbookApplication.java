@@ -1,5 +1,6 @@
 package com.xk.billbook;
 
+import com.github.pagehelper.PageHelper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +9,7 @@ import org.springframework.core.convert.converter.Converter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 
 @SpringBootApplication
 @MapperScan("com.xk.billbook.admin.mapper")
@@ -34,5 +36,19 @@ public class BillbookApplication {
                 return dateFmt;
             }
         };
+    }
+
+    @Bean
+    public PageHelper pageHelper() {
+        PageHelper pageHelper = new PageHelper();
+        Properties p = new Properties();
+        p.setProperty("offsetAsPageNum", "true");
+        p.setProperty("rowBoundsWithCount", "true");
+        p.setProperty("reasonable", "true");
+        p.setProperty("dialect", "mysql");
+        p.setProperty("supportMethodsArguments", "false");
+        p.setProperty("pageSizeZero", "true");
+        pageHelper.setProperties(p);
+        return pageHelper;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface BillTypeMgrMapper extends BaseMapper<Bill> {
+public interface BillTypeMgrMapper extends BaseMapper<BillType> {
     @Select("SELECT * FROM ${table} WHERE creator_id = #{creator_id}")
     List<BillType> findAll(@Param("table")String table, @Param("creator_id")int creatorId);
 }

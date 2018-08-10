@@ -1,6 +1,7 @@
 <script>
     function changeFrameHeight(){
         var ifm= document.getElementById("rightFrame");
+        var topHeight = $("#topbar-collapse").height();
         ifm.height=document.documentElement.clientHeight;
         var leftWidth = $(".admin-sidebar").width();
         ifm.width=document.documentElement.clientWidth-leftWidth-1;
@@ -11,6 +12,7 @@
     }
     $(function(){changeFrameHeight();});
 </script>
+
 <#include "/admin/left.html">
 <iframe src="/Report/homePage" name="rightFrame" frameborder="0" noresize="noresize" id="rightFrame" ></iframe>
 <#include "/admin/foot.html">

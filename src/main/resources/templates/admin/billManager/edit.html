@@ -12,7 +12,7 @@
 
     <div class="am-cf am-padding">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">账单管理</strong> /
-            <small>添加</small>
+            <small>修改</small>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
                     账单名
                 </div>
                 <div class="am-u-sm-10">
-                    <input type="text" name="name" value="" class="am-input-sm">
+                    <input type="text" name="name" value="${bill.name}" class="am-input-sm">
                 </div>
                 <!--<div class="am-u-sm-6">*必填，不可重复</div>-->
             </div>
@@ -38,8 +38,13 @@
                         <select name="billTypeId">
                             <option value="">请选择&nbsp;&nbsp;&nbsp;</option>
                             <#list typeList as type>
-                            <option value=${type.id}>${type.name}</option>
-                        </#list>
+                                <#if bill.billTypeId == type.id>
+                                    <option value=${type.id} selected="selected">${type.name}</option>
+                                <#else>
+                                    <option value=${type.id}>${type.name}</option>
+                                </#if>
+
+                            </#list>
                         </select>
                         <!--<label class="am-btn am-btn-default am-btn-xs">
                             <input type="radio" name="options" value="0" id="option1"> 出账
@@ -56,7 +61,7 @@
                     金额
                 </div>
                 <div class="am-u-sm-10">
-                    <input type="text" name="money" class="am-input-sm">
+                    <input type="text" name="money" value="${bill.money}" class="am-input-sm">
                 </div>
             </div>
 
@@ -66,7 +71,7 @@
                 </div>
                 <div class="am-u-sm-10">
                     <!--<input type="text" name="billDate" />-->
-                    <p><input type="text" id="billDate" name="billDate" class="am-form-field" readonly/></p>
+                    <p><input type="text" id="billDate" name="billDate" value="${bill.billDate?string('yyyy-MM-dd')}" class="am-form-field" readonly/></p>
                 </div>
             </div>
 
@@ -75,7 +80,7 @@
                     描述
                 </div>
                 <div class="am-u-sm-10">
-                    <textarea rows="10" name="description"></textarea>
+                    <textarea rows="10" name="description">${bill.description}</textarea>
                 </div>
             </div>
             <div class="am-margin">

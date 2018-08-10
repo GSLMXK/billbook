@@ -24,4 +24,12 @@ public class BillType extends BaseModel {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public String getColumns() {
+        return "id,name,type,comment";
+    }
+
+    public String getValues() {
+        return this.getId() + ",'" + this.getName() + "'," + this.getType() + ",'" + this.getComment() + "'";
+    }
 }

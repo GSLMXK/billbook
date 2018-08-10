@@ -4,11 +4,16 @@ function add(){
 }
 //修改
 function edit(id){
-    window.location.href="edit";
+    window.location.href="edit/"+id;
 }
 //删除
-function del(){
-
+function del(id){
+    window.location.href="delete/"+id;
+}
+//查找
+//翻页
+function turnPage(page){
+    window.location.href="list?pageSize=5&currentPage="+page;
 }
 //获取URL参数
 function getUrlParm(){

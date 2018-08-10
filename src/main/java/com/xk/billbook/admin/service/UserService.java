@@ -13,7 +13,7 @@ public class UserService extends BaseService {
     UserMapper userMapper;
 
     public User selectUser(int id) {
-        return (User)userMapper.findById(TABLE,id);
+        return (User)userMapper.findById(new User().getColumn(),TABLE,id);
     }
 
 }

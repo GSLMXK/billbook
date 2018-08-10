@@ -28,4 +28,8 @@ public class BaseModel {
         return "id=" + id +
                 ", name='" + name + '\'';
     }
+
+    public String getColumn(){
+        return "id,name";
+    }
 }

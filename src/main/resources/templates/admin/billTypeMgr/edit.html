@@ -1,0 +1,67 @@
+<#include "/admin/head.html">
+<div class="admin-content">
+
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">账单管理</strong> /
+            <small>添加</small>
+        </div>
+    </div>
+
+    <div class="am-g">
+        <form class="am-form" action="save" >
+            <input type="hidden" name="id" value="${type.id}" class="am-input-sm">
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    类型名称
+                </div>
+                <div class="am-u-sm-10">
+                    <!--<input type="hidden" name="creatorId" value="1" />-->
+                    <input type="text" name="name" value="${type.name}" class="am-input-sm">
+                </div>
+                <!--<div class="am-u-sm-6">*必填，不可重复</div>-->
+            </div>
+
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    出入账类型
+                </div>
+                <div class="am-u-sm-10">
+                    <div class="am-btn-group" data-am-button>
+
+                        <#if type.type == 0>
+                            <label class="am-btn am-btn-default am-btn-xs am-active">
+                            <input type="radio" name="type" value="0" id="option1" checked="checked"> 出账
+                            </label>
+                            <label class="am-btn am-btn-default am-btn-xs">
+                            <input type="radio" name="type" value="1" id="option2"> 入账
+                            </label>
+                        <#else>
+                            <label class="am-btn am-btn-default am-btn-xs">
+                            <input type="radio" name="type" value="0" id="option1"> 出账
+                            </label>
+                            <label class="am-btn am-btn-default am-btn-xs am-active">
+                            <input type="radio" name="type" value="1" id="option2" checked="checked"> 入账
+                            </label>
+                        </#if>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-g am-margin-top-sm">
+                <div class="am-u-sm-2 am-text-right">
+                    备注
+                </div>
+                <div class="am-u-sm-10">
+                    <textarea rows="10" name="comment">${type.comment}</textarea>
+                </div>
+            </div>
+            <div class="am-margin">
+                <button type="submit" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+                <!--     <button type="button" class="am-btn am-btn-primary am-btn-xs">返回列表</button>-->
+            </div>
+        </form>
+    </div>
+
+
+</div>

@@ -1,6 +1,8 @@
 package com.xk.billbook.admin.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.xk.billbook.admin.common.base.controller.BaseController;
+import com.xk.billbook.admin.common.base.model.PageBean;
 import com.xk.billbook.admin.model.Bill;
 import com.xk.billbook.admin.service.BillManagerService;
 import com.xk.billbook.admin.service.BillTypeMgrService;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,10 +36,17 @@ public class BillManagerController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public String findAll (Map<String, Object> map){
+    public String findAll (Map<String, Object> map,Integer currentPage, Integer pageSize){
         int id = 1;
-        List<Map<String,Object>> billList = billmgrService.findAll(id);
-        map.put("billList", billList);
+        if(currentPage == null){
+            currentPage = 1;
+        }
+        if(pageSize == null){
+            pageSize = 5;
+        }
+        PageBean<Map<String,Object>> billPage = billmgrService.findByPage(currentPage, pageSize,id);
+//        List<Map<String,Object>> billList = billmgrService.findAll(id);
+        map.put("billPage", billPage);
         return Base_URL+"list";
     }
 
@@ -47,25 +57,35 @@ public class BillManagerController extends BaseController {
         return Base_URL+"add";
     }
 
-    @RequestMapping("/edit")
-    public String toEditPage (Map<String, Object> map){
-        Integer editId = Integer.valueOf((String) map.get("bill_id"));
-        Bill bill = billmgrService.findById(editId);
+    @RequestMapping("/edit/{id}")
+    public String toEditPage (Map<String, Object> map, @PathVariable int id){
+        Bill bill = billmgrService.findById(id);
         List typeList = billTypeMgrService.findByList();
         map.put("typeList", typeList);
         map.put("bill", bill);
         return Base_URL+"edit";
     }
 
+    @RequestMapping("/delete/{id}")
+    public String delData (Map<String, Object> map, @PathVariable int id){
+        Integer result = billmgrService.delById(id);
+        if(result!=null&&result>0){
+            return "redirect:/BillMgr/list";
+        }
+        return toError();
+    }
+
     @RequestMapping("/save")
     public String save (Bill bill){
         Integer result = 0;
+        bill.setCreatorId(1);
         result = billmgrService.insertBill(bill);
         if(result!=null&&result>0){
             return "redirect:/BillMgr/list";
         }
         return toError();
     }
+
 
 
 }

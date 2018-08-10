@@ -3,7 +3,7 @@
 <div class="admin-content">
 
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">账单管理</strong> /
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">账单类型管理</strong> /
             <small>列表</small>
         </div>
     </div>
@@ -48,31 +48,33 @@
                     <tr>
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">序号</th>
-                        <th class="table-title">标题</th>
-                        <th class="table-type">账单类型</th>
-                        <th class="table-type">金额</th>
-                        <th class="table-author">记账人</th>
-                        <th class="table-date">账单日期</th>
+                        <th class="table-title">名称</th>
+                        <th class="table-type">类型</th>
+                        <th class="table-type">备注</th>
                         <th class="table-set">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <#list billPage.items as bill>
+                        <#list typePage.items as type>
                         <tr>
                             <td><input type="checkbox"/></td>
-                            <td>${bill_index+1}</td>
-                            <td><a href="#">${bill.name}</a></td>
-                            <td>${bill.typeName}</td>
-                            <td>${bill.money}</td>
-                            <td>${bill.creatorName}</td>
-                            <td>${bill.billDate?string('yyyy-MM-dd')}</td>
+                            <td>${type_index+1}</td>
+                            <td><a href="#">${type.name}</a></td>
+                            <td>
+                                <#if type.type==0>
+                                    出账
+                                <#else>
+                                    入账
+                                </#if>
+                            </td>
+                            <td>${type.comment}</td>
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button type="button" onclick="edit(${bill.id})" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                        <button type="button" onclick="edit(${type.id})" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </button>
-                                        <button type="button" onclick="del(${bill.id})" class="am-btn am-btn-default am-btn-xs am-text-danger"><span
+                                        <button type="button" onclick="del(${type.id})" class="am-btn am-btn-default am-btn-xs am-text-danger"><span
                                                 class="am-icon-trash-o"></span> 删除
                                         </button>
                                     </div>
@@ -83,18 +85,18 @@
                     </tbody>
                 </table>
                 <div class="am-cf">
-                    共 ${billPage.totalNum} 条记录
+                    共 ${typePage.totalNum} 条记录
                     <div class="am-fr">
                         <ul class="am-pagination">
                             <li><span href="#" onclick="turnPage(1)">«</span></li>
-                            <#list 1..billPage.totalPage as i>
-                                <#if i == billPage.currentPage>
+                            <#list 1..typePage.totalPage as i>
+                                <#if i == typePage.currentPage>
                                     <li class="am-active"><span href="#">${i}</span></li>
                                 <#else>
                                     <li><span href="#" onclick="turnPage(${i})">${i}</span></li>
                                 </#if>
                             </#list>
-                            <li><span href="#" onclick="turnPage(${billPage.totalPage})">»</span></li>
+                            <li><span href="#" onclick="turnPage(${typePage.totalPage})">»</span></li>
                         </ul>
                     </div>
                 </div>
