@@ -11,4 +11,6 @@ public abstract class BaseService<E> {
 //    public E findById(int id) {
 //        return (E)BaseMapper.findById(this.getTable(),id);
 //    }
+
+
 }

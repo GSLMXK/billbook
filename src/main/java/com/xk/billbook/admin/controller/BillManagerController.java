@@ -85,6 +85,15 @@ public class BillManagerController extends BaseController {
         }
         return toError();
     }
+    @RequestMapping("/updateBill")
+    public String updateBill (Bill bill){
+        Integer result = 0;
+        result = billmgrService.update(bill);
+        if(result!=null&&result>0){
+            return "redirect:/BillMgr/list";
+        }
+        return toError();
+    }
 
 
 

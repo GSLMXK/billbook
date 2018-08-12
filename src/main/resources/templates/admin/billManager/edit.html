@@ -17,8 +17,8 @@
     </div>
 
     <div class="am-g">
-        <form class="am-form" action="save" >
-            <input type="hidden" name="id" value="" class="am-input-sm">
+        <form class="am-form" action="updateBill" >
+            <input type="hidden" name="id" value=${bill.id} class="am-input-sm">
             <div class="am-g am-margin-top">
                 <div class="am-u-sm-2 am-text-right">
                     账单名
@@ -46,12 +46,12 @@
 
                             </#list>
                         </select>
-                        <!--<label class="am-btn am-btn-default am-btn-xs">
+                        &lt;!&ndash;<label class="am-btn am-btn-default am-btn-xs">
                             <input type="radio" name="options" value="0" id="option1"> 出账
                         </label>
                         <label class="am-btn am-btn-default am-btn-xs">
                             <input type="radio" name="options" value="1" id="option2"> 入账
-                        </label>-->
+                        </label>&ndash;&gt;
                     </div>
                 </div>
             </div>

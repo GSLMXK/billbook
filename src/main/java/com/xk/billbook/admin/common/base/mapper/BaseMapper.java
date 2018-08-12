@@ -41,5 +41,5 @@ public interface BaseMapper<E> {
     Integer delByIds(@Param("table")String table, @Param("ids")String ids);
 
     @Update("UPDATE ${table} SET ${values} WHERE id=#{id}")
-    int updateEntity(@Param("table")String table,@Param("values")String values, @Param("id")Integer id);
+    Integer updateEntity(@Param("table")String table,@Param("values")String values, @Param("id")Integer id);
 }

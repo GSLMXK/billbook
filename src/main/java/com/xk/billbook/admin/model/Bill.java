@@ -12,17 +12,17 @@ import java.util.Date;
  * 2018/8/3
  */
 public class Bill extends BaseModel {
-    private String billTypeId;
+    private Integer billTypeId;
     private BigDecimal money;
     private String description;
     private Integer creatorId;
     private Date billDate;
 
-    public String getBillTypeId() {
+    public Integer getBillTypeId() {
         return billTypeId;
     }
 
-    public void setBillTypeId(String billTypeId) {
+    public void setBillTypeId(Integer billTypeId) {
         this.billTypeId = billTypeId;
     }
 

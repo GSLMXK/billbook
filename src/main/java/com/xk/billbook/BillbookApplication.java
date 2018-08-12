@@ -20,7 +20,7 @@ public class BillbookApplication {
     }
 
     @Bean
-    public Converter<String, Date> addNewConvert() {
+    public Converter<String, Date> addDateConvert() {
         return new Converter<String, Date>() {
             @Override
             public Date convert(String source) {
@@ -37,7 +37,15 @@ public class BillbookApplication {
             }
         };
     }
-
+    @Bean
+    public Converter<String, Integer> addIntConvert() {
+        return new Converter<String, Integer>() {
+            @Override
+            public Integer convert(String source) {
+                return Integer.valueOf(source);
+            }
+        };
+    }
     @Bean
     public PageHelper pageHelper() {
         PageHelper pageHelper = new PageHelper();
