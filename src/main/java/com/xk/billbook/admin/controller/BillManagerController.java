@@ -1,8 +1,8 @@
 package com.xk.billbook.admin.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.xk.billbook.admin.common.base.controller.BaseController;
 import com.xk.billbook.admin.common.base.model.PageBean;
+import com.xk.billbook.admin.common.interceptor.Auth;
 import com.xk.billbook.admin.model.Bill;
 import com.xk.billbook.admin.service.BillManagerService;
 import com.xk.billbook.admin.service.BillTypeMgrService;
@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +19,7 @@ import java.util.Map;
  * xiekuang
  * 2018/8/3
  */
+@Auth
 @Controller
 @RequestMapping("/BillMgr")
 public class BillManagerController extends BaseController {
@@ -85,7 +83,7 @@ public class BillManagerController extends BaseController {
         }
         return toError();
     }
-    @RequestMapping("/updateBill")
+    @RequestMapping("/update")
     public String updateBill (Bill bill){
         Integer result = 0;
         result = billmgrService.update(bill);

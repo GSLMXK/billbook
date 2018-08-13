@@ -76,4 +76,14 @@ public class BillTypeMgrController extends BaseController<BillType> {
         }
         return toError();
     }
+
+    @RequestMapping("/update")
+    public String updateBill (BillType type){
+        Integer result = 0;
+        result = billTypeMgrService.update(type);
+        if(result!=null&&result>0){
+            return "redirect:/BillType/list";
+        }
+        return toError();
+    }
 }

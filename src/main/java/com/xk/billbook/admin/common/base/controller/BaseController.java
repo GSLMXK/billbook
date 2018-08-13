@@ -16,6 +16,7 @@ public class BaseController<E> {
         return "admin/error";
     }
 
+
     @RequestMapping("/index")
     public String toIndex (){
         return "admin/index";

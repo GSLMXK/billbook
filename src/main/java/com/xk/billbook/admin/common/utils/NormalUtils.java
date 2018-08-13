@@ -1,4 +1,4 @@
-package com.xk.billbook.admin.common.base.utils;
+package com.xk.billbook.admin.common.utils;
 
 public class NormalUtils {
 

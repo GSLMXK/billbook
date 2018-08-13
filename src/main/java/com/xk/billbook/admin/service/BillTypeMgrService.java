@@ -42,4 +42,14 @@ public class BillTypeMgrService extends BaseService<BillType> {
     public Integer insertBill(BillType type){
         return  billTypeMgrMapper.insertByParm(TABLE,type.getColumns(),type.getValues());
     }
+
+
+    //修改
+    public Integer update(BillType type) {
+        String[] columns = type.getColumns().split(",");
+        String[] value = type.getValues().split(",");
+        //组装修改sql
+        String values = combineUpdateSql(columns,value);
+        return  billTypeMgrMapper.updateEntity(TABLE,values,type.getId());
+    }
 }

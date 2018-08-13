@@ -3,7 +3,6 @@ package com.xk.billbook.admin.service;
 import com.github.pagehelper.PageHelper;
 import com.xk.billbook.admin.common.base.model.PageBean;
 import com.xk.billbook.admin.common.base.service.BaseService;
-import com.xk.billbook.admin.common.base.utils.NormalUtils;
 import com.xk.billbook.admin.mapper.BillManagerMapper;
 import com.xk.billbook.admin.model.Bill;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class BillManagerService extends BaseService<Bill> {
 
     //
     public Bill findById(int id) {
-        String selectParm = "id,name,billType_id billTypeId,money,bill_date billDate,description";
+        String selectParm = "id,name,billType_id billTypeId,money,bill_date billDate,description, creator_id creatorId";
         return (Bill) billMapper.findById(selectParm,TABLE,id);
     }
 
@@ -54,24 +53,14 @@ public class BillManagerService extends BaseService<Bill> {
         return pageData;
     }
 
+    //修改
     public Integer update(Bill bill) {
-        String values = combineUpdateSql(bill);
+        String[] columns = bill.getColumns().split(",");
+        String[] value = bill.getValues().split(",");
+        //组装修改sql
+        String values = combineUpdateSql(columns,value);
         return  billMapper.updateEntity(TABLE,values,bill.getId());
     }
 
-    /**
-     * 组装update Sql
-     * @param bill
-     * @return
-     */
-    public String combineUpdateSql(Bill bill){
-        String[] columns = bill.getColumns().split(",");
-        String[] values = bill.getValues().split(",");
-        StringBuffer sql = new StringBuffer();
-        for (int i=0;i<columns.length;i++){
-            sql.append(columns[i]+"="+values[i]+", ");
-        }
-        String result = new NormalUtils().subLastSymbol(sql.toString(),",");
-        return result;
-    }
+
 }
