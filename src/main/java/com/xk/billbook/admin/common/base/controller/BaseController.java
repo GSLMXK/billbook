@@ -1,10 +1,13 @@
 package com.xk.billbook.admin.common.base.controller;
 
-import com.github.pagehelper.PageHelper;
+import com.xk.billbook.admin.common.base.mapper.BaseMapper;
+import com.xk.billbook.admin.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 public class BaseController<E> {
@@ -18,7 +21,8 @@ public class BaseController<E> {
 
 
     @RequestMapping("/index")
-    public String toIndex (){
+    public String toIndex (HttpServletRequest request, Map<String, Object> map){
+        map.put("username", request.getSession(true).getAttribute("name"));
         return "admin/index";
     }
 

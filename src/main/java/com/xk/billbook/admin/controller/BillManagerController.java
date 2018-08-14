@@ -19,7 +19,6 @@ import java.util.Map;
  * xiekuang
  * 2018/8/3
  */
-@Auth
 @Controller
 @RequestMapping("/BillMgr")
 public class BillManagerController extends BaseController {

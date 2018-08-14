@@ -1,70 +1,50 @@
 package com.xk.billbook.admin.common.interceptor;
 
-import com.github.pagehelper.StringUtil;
-import com.xk.billbook.admin.common.base.model.SessionData;
-import com.xk.billbook.admin.common.utils.RedisUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.lang.reflect.Method;
+import javax.servlet.http.HttpSession;
 
-import static com.xk.billbook.admin.common.utils.Constants.MOBILE_NUMBER_SESSION_KEY;
-import static com.xk.billbook.admin.common.utils.Constants.SESSION_KEY;
-import static com.xk.billbook.admin.common.utils.Constants.USER_CODE_SESSION_KEY;
+/**
+ * 登录拦截
+ */
+public class LoginInterceptor implements HandlerInterceptor {
+    Logger logger =  LoggerFactory.getLogger(LoginInterceptor.class);
 
-@Component
-public class LoginInterceptor extends HandlerInterceptorAdapter {
-    @Autowired
-    private RedisUtil redisUtils;
-    private final static String SESSION_KEY_PREFIX = "session:";
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response, Object handler) throws Exception {
-        if (!handler.getClass().isAssignableFrom(HandlerMethod.class)) {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+            throws Exception {
+        // TODO Auto-generated method stub
+        logger.info("------preHandle------");
+        //获取session
+        HttpSession session = request.getSession(true);
+        //判断用户ID是否存在，不存在就跳转到登录界面
+        if(session.getAttribute("userId") == null){
+            logger.info("拦截"+request.getRequestURL());
+            logger.info("------:跳转到login页面！");
+            response.sendRedirect(request.getContextPath()+"/User/login");
+            return false;
+        }else{
+            session.setAttribute("userId", session.getAttribute("userId"));
             return true;
         }
-        handlerSession(request);
+    }
 
-        final HandlerMethod handlerMethod = (HandlerMethod) handler;
-        final Method method = handlerMethod.getMethod();
-        final Class<?> clazz = method.getDeclaringClass();
-        if (clazz.isAnnotationPresent(Auth.class) ||
-                method.isAnnotationPresent(Auth.class)) {
-            if(request.getAttribute(USER_CODE_SESSION_KEY) == null){
-
-                throw new Exception();
-
-            }else{
-                return true;
-            }
-        }
-
-        return true;
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+                           ModelAndView modelAndView) throws Exception {
+        // TODO Auto-generated method stub
 
     }
-    public void  handlerSession(HttpServletRequest request) {
-        String sessionId = request.getHeader(SESSION_KEY);
-        if(StringUtil.isEmpty(sessionId)){
-            sessionId=(String) request.getSession().getAttribute(SESSION_KEY);
-        }
-        if (StringUtil.isNotEmpty(sessionId)) {
-            SessionData model = (SessionData) redisUtils.get(SESSION_KEY_PREFIX+sessionId);
-            if (model == null) {
-                return ;
-            }
-            request.setAttribute(SESSION_KEY,sessionId);
-            Integer userCode = model.getUserCode();
-            if (userCode != null) {
-                request.setAttribute(USER_CODE_SESSION_KEY, Long.valueOf(userCode));
-            }
-            String mobile = model.getMobileNumber();
-            if (mobile != null) {
-                request.setAttribute(MOBILE_NUMBER_SESSION_KEY, mobile);
-            }
-        }
-        return ;
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+            throws Exception {
+        // TODO Auto-generated method stub
+
     }
 }
