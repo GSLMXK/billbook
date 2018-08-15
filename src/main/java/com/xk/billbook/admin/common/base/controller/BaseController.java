@@ -25,6 +25,15 @@ public class BaseController<E> {
         map.put("username", request.getSession(true).getAttribute("name"));
         return "admin/index";
     }
+    @RequestMapping("/login")
+    public String loginPage(){
+        return "admin/user/login";
+    }
+    @RequestMapping("/logout")
+    public String userLogout (HttpServletRequest request, Map<String, Object> map){
+        request.getSession(true).removeAttribute("userId");
+        return loginPage();
+    }
 
     @RequestMapping("/top.jsp")
     public String loadTop (){

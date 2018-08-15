@@ -2,7 +2,7 @@
 <!-- sidebar start -->
 <div class="admin-sidebar">
     <ul class="am-list admin-sidebar-list">
-        <li><a href="admin-index.html"><span class="am-icon-home"></span> 首页</a></li>
+        <li><a href="/index"><span class="am-icon-home"></span> 首页</a></li>
         <li class="admin-parent">
             <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 我的账单 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
             <ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav" style="height: 0px;">
@@ -12,9 +12,9 @@
             </ul>
         </li>
         <li><a href="admin-table.html"><span class="am-icon-table"></span> 日志</a></li>
-        <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 公告管理</a></li>
+        <li><a href="/Notice/list" target="rightFrame"><span class="am-icon-pencil-square-o"></span> 公告管理</a></li>
         <li class="admin-parent">
-            <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><span class="am-icon-file"></span> 账单统计 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+            <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><span class="am-icon-line-chart"></span> 账单统计 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
             <ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav2" style="height: 0px;">
                 <li><a href="admin-user.html" class="am-cf"><span class="am-icon-check"></span> 入账统计<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                 <li><a href="admin-help.html"><span class="am-icon-puzzle-piece"></span> 出账统计</a></li>
@@ -23,7 +23,15 @@
                 <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>
             </ul>
         </li>
-        <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+        <li class="admin-parent">
+            <a class="am-cf" data-am-collapse="{target: '#collapse-nav3'}"><span class="am-icon-code"></span> 小脚本小插件 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+            <ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav3" style="height: 0px;">
+                <li><a href="#" class="am-cf"><span class="am-icon-check"></span> python识图<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                <li><a href="#"><span class="am-icon-puzzle-piece"></span> 爬虫</a></li>
+                <li><a href="#"><span class="am-icon-th"></span>网站 <span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
+            </ul>
+        </li>
+        <li><a href="/logout"><span class="am-icon-sign-out"></span> 注销</a></li>
     </ul>
 
     <div class="am-panel am-panel-default admin-sidebar-panel">

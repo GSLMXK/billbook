@@ -25,10 +25,6 @@ public class UserController extends BaseController {
         return userService.selectUser(id).toString();
     }
 
-    @RequestMapping("/login")
-    public String loginPage(){
-        return "admin/user/login";
-    }
 
     @RequestMapping("/loginCheck")
     public String loginCheck(HttpServletRequest request, User user){

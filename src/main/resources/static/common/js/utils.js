@@ -19,3 +19,7 @@ function turnPage(page){
 function getUrlParm(){
 
 }
+//获取公告
+function getNotice(){
+
+}

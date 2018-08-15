@@ -5,7 +5,10 @@
     var $fullText = $('.admin-fullText');
     $('#admin-fullscreen').on('click', function() {
       $.AMUI.fullscreen.toggle();
-      $.AMUI.fullscreen.isFullscreen ? $fullText.text('关闭全屏') : $fullText.text('开启全屏');
+    });
+
+    $(document).on($.AMUI.fullscreen.raw.fullscreenchange, function() {
+      $fullText.text($.AMUI.fullscreen.isFullscreen ? '退出全屏' : '开启全屏');
     });
   });
 })(jQuery);
