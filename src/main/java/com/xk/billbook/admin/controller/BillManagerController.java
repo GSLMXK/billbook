@@ -7,10 +7,12 @@ import com.xk.billbook.admin.model.Bill;
 import com.xk.billbook.admin.service.BillManagerService;
 import com.xk.billbook.admin.service.BillTypeMgrService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +35,8 @@ public class BillManagerController extends BaseController {
     }
 
     @RequestMapping("/list")
-    public String findAll (Map<String, Object> map,Integer currentPage, Integer pageSize){
-        int id = 1;
+    public String findAll (HttpServletRequest request, Map<String, Object> map, Integer currentPage, Integer pageSize){
+        int id = (Integer) request.getSession(true).getAttribute("userId");
         if(currentPage == null){
             currentPage = 1;
         }

@@ -3,6 +3,7 @@ package com.xk.billbook.admin.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,14 @@ public class ReportController {
         return Base_URL+"/homePage";
     }
 
-
+    /**'
+     * Ajax 获取首页统计数据
+     * @return
+     */
+    @RequestMapping("/pageData")
+    @ResponseBody
     public List<Map<String,Object>> getPageData(){
+
         return null;
     }
 }

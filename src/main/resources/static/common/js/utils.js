@@ -23,3 +23,17 @@ function getUrlParm(){
 function getNotice(){
 
 }
+
+//url 访问地址   parm  传递参数   async 是否异步false  true
+function getAjaxData(url, parm, async){
+    $.ajax({
+        type : "POST",
+        url : url,
+        data : parm,
+        dataType : "json",
+        async: async,
+        success : function(json) {
+            return json;
+        }
+    });
+}
