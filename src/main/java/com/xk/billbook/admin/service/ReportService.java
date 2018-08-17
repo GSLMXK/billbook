@@ -11,7 +11,10 @@ import java.util.Map;
 public class ReportService extends BaseService {
     @Autowired
     ReportMapper reportMapper;
-       public List<Map<String,Object>> getPageData(){
-           return reportMapper.findByParm("","","");
+       public List<Map<String,Object>> getPageData(Integer id){
+           String selectParm = "type.type, sum(bill.money) countMoney";
+           String table = "bb_bill bill left join bb_billType type on bill.billType_id = type.id ";
+           String condition = " bill.creator_id = "+id+" GROUP BY type.type ";
+           return reportMapper.findByParm(table,selectParm,condition);
        }
 }

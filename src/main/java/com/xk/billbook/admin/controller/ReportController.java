@@ -1,10 +1,14 @@
 package com.xk.billbook.admin.controller;
 
+import com.xk.billbook.admin.service.ReportService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +20,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/Report")
 public class ReportController {
+    @Autowired
+    private ReportService reportService;
     private final String Base_URL = "admin/report";
     /**
      * 展示统计主页
@@ -33,8 +39,10 @@ public class ReportController {
      */
     @RequestMapping("/pageData")
     @ResponseBody
-    public List<Map<String,Object>> getPageData(){
-
-        return null;
+    public Map<String,Object> getPageData(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<String,Object>();
+        Integer id = (Integer)request.getSession(true).getAttribute("userId");
+        result.put("moneyOI",reportService.getPageData(id));
+        return result;
     }
 }
