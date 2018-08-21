@@ -11,4 +11,7 @@ public class NormalUtils {
         }
         return str;
     }
+
+    //图片上传
+    //文件上传
 }
