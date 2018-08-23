@@ -14,4 +14,6 @@ public class NormalUtils {
 
     //图片上传
     //文件上传
+    //清除网站无用数据
+    //清除Ueditor无用图片等数据
 }

@@ -1,10 +1,13 @@
 package com.xk.billbook;
 
 import com.github.pagehelper.PageHelper;
+import com.github.tobato.fastdfs.FdfsClientConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.convert.converter.Converter;
 
 import java.text.SimpleDateFormat;
@@ -13,6 +16,7 @@ import java.util.Properties;
 
 @SpringBootApplication
 @MapperScan("com.xk.billbook.admin.mapper")
+@Import(FdfsClientConfig.class)
 public class BillbookApplication {
 
     public static void main(String[] args) {
