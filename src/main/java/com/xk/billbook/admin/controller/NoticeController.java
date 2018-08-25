@@ -2,10 +2,12 @@ package com.xk.billbook.admin.controller;
 
 import com.xk.billbook.admin.common.base.controller.BaseController;
 import com.xk.billbook.admin.common.base.model.PageBean;
+import com.xk.billbook.admin.model.Bill;
 import com.xk.billbook.admin.model.Notice;
 import com.xk.billbook.admin.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -29,7 +31,13 @@ public class NoticeController extends BaseController<Notice> {
         }
         PageBean<Notice> typePage = noticeService.findByPage(currentPage, pageSize, id);
 //        List<Map<String,Object>> billList = billmgrService.findAll(id);
-        map.put("noticePage", typePage);
+        map.put("page", typePage);
         return Base_URL + "list";
+    }
+    @RequestMapping("/edit/{id}")
+    public String toEditPage (Map<String, Object> map, @PathVariable int id){
+        Notice notice = noticeService.findById(id);
+        map.put("notice", notice);
+        return Base_URL+"edit";
     }
 }

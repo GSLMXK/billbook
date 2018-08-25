@@ -1,7 +1,6 @@
 package com.xk.billbook;
 
 import com.github.pagehelper.PageHelper;
-import com.github.tobato.fastdfs.FdfsClientConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +15,6 @@ import java.util.Properties;
 
 @SpringBootApplication
 @MapperScan("com.xk.billbook.admin.mapper")
-@Import(FdfsClientConfig.class)
 public class BillbookApplication {
 
     public static void main(String[] args) {

@@ -30,7 +30,7 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: URL + "jsp/controller.jsp"
+        , serverUrl: URL + "ueditorConfig"
 		,imageUrl:"/ueditor"
 		,imagePath:""
 		,imageFieldName:"upfile"

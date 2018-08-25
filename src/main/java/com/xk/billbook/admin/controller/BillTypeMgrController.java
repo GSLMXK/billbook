@@ -42,7 +42,7 @@ public class BillTypeMgrController extends BaseController<BillType> {
         }
         PageBean<BillType> typePage = billTypeMgrService.findByPage(currentPage, pageSize, id);
 //        List<Map<String,Object>> billList = billmgrService.findAll(id);
-        map.put("typePage", typePage);
+        map.put("page", typePage);
         return Base_URL + "list";
     }
 

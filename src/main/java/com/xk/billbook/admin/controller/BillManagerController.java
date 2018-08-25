@@ -45,7 +45,7 @@ public class BillManagerController extends BaseController {
         }
         PageBean<Map<String,Object>> billPage = billmgrService.findByPage(currentPage, pageSize,id);
 //        List<Map<String,Object>> billList = billmgrService.findAll(id);
-        map.put("billPage", billPage);
+        map.put("page", billPage);
         return Base_URL+"list";
     }
 

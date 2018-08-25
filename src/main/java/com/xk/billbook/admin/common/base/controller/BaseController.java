@@ -1,7 +1,6 @@
 package com.xk.billbook.admin.common.base.controller;
 
 import com.xk.billbook.admin.common.base.mapper.BaseMapper;
-import com.xk.billbook.admin.common.utils.FastDFSClientWrapper;
 import com.xk.billbook.admin.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +20,6 @@ public class BaseController<E> {
 
     private final String ERROR_URL = "admin/shopCart/error";
 
-    FastDFSClientWrapper fastDFSClientWrapper;
 
     //返回错误页
     public String toError(){
@@ -64,7 +62,7 @@ public class BaseController<E> {
         return "admin/foot";
     }
 
-    @RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, String> imgUpload3(MultipartFile upfile) {
         System.out.println("开始上传");
@@ -85,5 +83,5 @@ public class BaseController<E> {
         result.put("state", "SUCCESS");
 
         return result;
-    }
+    }*/
 }

@@ -1,0 +1,16 @@
+<div class="am-cf">
+    共 ${page.totalNum} 条记录
+    <div class="am-fr">
+        <ul class="am-pagination">
+            <li><span href="#" onclick="turnPage(1)">«</span></li>
+            <#list 1..page.totalPage as i>
+            <#if i == page.currentPage>
+            <li class="am-active"><span href="#">${i}</span></li>
+            <#else>
+            <li><span href="#" onclick="turnPage(${i})">${i}</span></li>
+        </#if>
+    </#list>
+    <li><span href="#" onclick="turnPage(${page.totalPage})">»</span></li>
+    </ul>
+</div>
+</div>
