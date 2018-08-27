@@ -34,10 +34,26 @@ public class NoticeController extends BaseController<Notice> {
         map.put("page", typePage);
         return Base_URL + "list";
     }
+
     @RequestMapping("/edit/{id}")
     public String toEditPage (Map<String, Object> map, @PathVariable int id){
         Notice notice = noticeService.findById(id);
         map.put("notice", notice);
         return Base_URL+"edit";
+    }
+
+    @RequestMapping("/add")
+    public String toAddPage (Map<String, Object> map){
+        return Base_URL+"add";
+    }
+
+    @RequestMapping("/update")
+    public String updateBill (Notice notice){
+        Integer result = 0;
+        result = noticeService.update(notice);
+        if(result!=null&&result>0){
+            return "redirect:/Notice/list";
+        }
+        return toError();
     }
 }

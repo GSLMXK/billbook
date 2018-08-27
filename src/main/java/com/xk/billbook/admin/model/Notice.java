@@ -11,7 +11,7 @@ public class Notice extends BaseModel {
     private Date createDate;
 
     public String getColumns() {
-        return "id,name,billType_id,money,description,creator_id,bill_date";
+        return "id,name,content,create_date";
     }
 
     public String getValues() {

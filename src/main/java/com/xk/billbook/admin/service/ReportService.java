@@ -14,7 +14,7 @@ public class ReportService extends BaseService {
        public List<Map<String,Object>> getPageData(Integer id){
            String selectParm = "type.type, sum(bill.money) countMoney";
            String table = "bb_bill bill left join bb_billType type on bill.billType_id = type.id ";
-           String condition = " bill.creator_id = "+id+" GROUP BY type.type ";
+           String condition = " bill.creator_id = "+id+" and DATE_FORMAT( bill.bill_date, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' ) GROUP BY type.type ";
            return reportMapper.findByParm(table,selectParm,condition);
        }
 }

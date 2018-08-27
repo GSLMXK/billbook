@@ -21,7 +21,7 @@ public class NoticeService extends BaseService<Notice> {
     }
 
     public Notice findById(int id) {
-        String selectParm = "*";
+        String selectParm = "id,name,content,create_date createDate";
         return (Notice) noticeMapper.findById(selectParm,TABLE,id);
     }
 
@@ -33,5 +33,13 @@ public class NoticeService extends BaseService<Notice> {
         PageBean<Notice> pageData = new PageBean<Notice>(currentPage, pageSize, countNums);
         pageData.setItems(allItems);
         return pageData;
+    }
+    //修改
+    public Integer update(Notice notice) {
+        String[] columns = notice.getColumns().split(",");
+        String[] value = notice.getValues().split(",");
+        //组装修改sql
+        String values = combineUpdateSql(columns,value);
+        return  noticeMapper.updateEntity(TABLE,values,notice.getId());
     }
 }

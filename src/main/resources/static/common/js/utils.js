@@ -1,3 +1,7 @@
+$(function () {
+   initPage();
+});
+
 //添加
 function add(){
     window.location.href="add";
@@ -37,3 +41,5 @@ function getAjaxData(url, parm, async){
         }
     });
 }
+//页面初始化
+function initPage(){}
