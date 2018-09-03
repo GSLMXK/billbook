@@ -41,25 +41,12 @@ public class UserController extends BaseController {
     public String registerPage(){
         return "admin/user/register";
     }
-    /**
-     * freeMarker测试
-     */
-    @RequestMapping("/freemarker")
-    public String freemarker(Map<String, Object> map){
-        map.put("name", "Joe");
-        map.put("sex", 1);    //sex:性别，1：男；0：女；
 
-        // 模拟数据
-        List<Map<String, Object>> friends = new ArrayList<Map<String, Object>>();
-        Map<String, Object> friend = new HashMap<String, Object>();
-        friend.put("name", "xbq");
-        friend.put("age", 22);
-        friends.add(friend);
-        friend = new HashMap<String, Object>();
-        friend.put("name", "July");
-        friend.put("age", 18);
-        friends.add(friend);
-        map.put("friends", friends);
-        return "admin/test/freemarker";
+    @RequestMapping("/userCenter")
+    public String userCenterPage(HttpServletRequest request,Map<String, Object> map){
+        Integer id = (Integer)request.getSession(true).getAttribute("userId");
+        User user = userService.findById(id);
+        map.put("user",user);
+        return "admin/user/userCenter";
     }
 }

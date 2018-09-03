@@ -21,7 +21,10 @@ public class UserService extends BaseService {
         return (User)userMapper.findById(new User().getColumn(),TABLE,id);
     }
 
-
+    public User findById(int id) {
+        String selectParm = "id,name,account,password, photo";
+        return (User) userMapper.findById(selectParm,TABLE,id);
+    }
     public List<Map<String,Object>> loginCheck(User user){
         StringBuffer condition = new StringBuffer("account='"+user.getAccount());
         condition.append("' and password='"+user.getPassword()+"'");
