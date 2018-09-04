@@ -1,8 +1,10 @@
 package com.xk.billbook.admin.common.base.controller;
 
 import com.xk.billbook.admin.common.base.mapper.BaseMapper;
+import com.xk.billbook.admin.common.utils.NormalUtils;
 import com.xk.billbook.admin.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,13 +21,28 @@ import java.util.Map;
 public class BaseController<E> {
 
     private final String ERROR_URL = "admin/shopCart/error";
-
-
+    private NormalUtils normalUtils = new NormalUtils();
+    /**
+     * 在配置文件中配置的文件保存路径
+     */
+    @Value("${file.location}")
+    private String location;
     //返回错误页
     public String toError(){
         return "admin/error";
     }
 
+    //保存文件
+    public String saveFile(MultipartFile multipartFile, String filePath, String fileName){
+        String result = "";
+        try {
+            filePath = location+filePath;
+            result = normalUtils.saveFile(multipartFile, filePath,fileName);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     @RequestMapping("/index")
     public String toIndex (HttpServletRequest request, Map<String, Object> map){

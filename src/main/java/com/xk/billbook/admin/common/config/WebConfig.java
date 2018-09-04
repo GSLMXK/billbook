@@ -19,12 +19,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/User/login","/User/loginCheck","/error","/static/**");
     }
 
-    /**
-     * 在配置文件中配置的文件保存路径
-     */
-    @Value("${img.location}")
-    private String location;
-
     @Bean
     public MultipartConfigElement multipartConfigElement(){
         MultipartConfigFactory factory = new MultipartConfigFactory();
