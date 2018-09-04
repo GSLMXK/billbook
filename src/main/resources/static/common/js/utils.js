@@ -15,6 +15,9 @@ function del(id){
     window.location.href="delete/"+id;
 }
 //查找
+function search(id){
+    window.location.href="list/"+id;
+}
 //翻页
 function turnPage(page){
     window.location.href="list?pageSize=5&currentPage="+page;

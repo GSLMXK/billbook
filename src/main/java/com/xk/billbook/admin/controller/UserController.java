@@ -55,12 +55,23 @@ public class UserController extends BaseController {
         Integer id = (Integer)request.getSession(true).getAttribute("userId");
         User user = userService.findById(id);
         map.put("user",user);
+        map.put("properties",returnProperties());
+
         return "admin/user/userCenter";
     }
-
+    @RequestMapping("/update")
+    public String updateUser (User user){
+        Integer result = 0;
+        result = userService.update(user);
+        if(result!=null&&result>0){
+            return "redirect:/User/userCenter";
+        }
+        return toError();
+    }
     @RequestMapping("/uploadPhoto")
     @ResponseBody
     public String uploadImg(@RequestParam("userPhoto") MultipartFile multipartFile, HttpServletRequest request)  {
+        Integer result = 0;
         if (multipartFile.isEmpty() || StringUtils.isEmpty(multipartFile.getOriginalFilename())) {
         }
         String contentType = multipartFile.getContentType();
@@ -72,13 +83,20 @@ public class UserController extends BaseController {
         String file_name = "photo.jpg";
         try {
             file_name = saveFile(multipartFile, filePath, file_name);
-            if(StringUtils.isEmpty(file_name)){
+            if(!StringUtils.isEmpty(file_name)){
                 System.out.println("Success");
+                User user = userService.findById(userId);
+                user.setPhoto(filePath);
+                result = userService.update(user);
+                if(result!=null&&result>0){
+                    return "Success";
+                }
+                return "Error";
             }
             return "";
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return file_name;
+        return "Error";
     }
 }

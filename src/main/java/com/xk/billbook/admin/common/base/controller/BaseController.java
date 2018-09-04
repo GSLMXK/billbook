@@ -15,12 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
 public class BaseController<E> {
 
-    private final String ERROR_URL = "admin/shopCart/error";
+    private final String ERROR_URL = "admin/error";
     private NormalUtils normalUtils = new NormalUtils();
     /**
      * 在配置文件中配置的文件保存路径
@@ -32,6 +33,12 @@ public class BaseController<E> {
         return "admin/error";
     }
 
+    //返回各种静态数据
+    public Map<String,String> returnProperties(){
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("location",location);
+        return map;
+    }
     //保存文件
     public String saveFile(MultipartFile multipartFile, String filePath, String fileName){
         String result = "";
@@ -59,6 +66,14 @@ public class BaseController<E> {
         return loginPage();
     }
 
+    public Map<String, Object> getParms(HttpServletRequest request, String[] parmNames){
+        Map<String, Object> map = new HashMap<String, Object>();
+        for (int i= 0; i<parmNames.length; i++){
+            map.put(parmNames[i],request.getParameter(parmNames[i]));
+        }
+        return map;
+    }
+
     @RequestMapping("/top.jsp")
     public String loadTop (){
         return "admin/top";
@@ -79,26 +94,4 @@ public class BaseController<E> {
         return "admin/foot";
     }
 
-   /* @RequestMapping(value = "/admin/upload", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, String> imgUpload3(MultipartFile upfile) {
-        System.out.println("开始上传");
-        Map<String, String> result = new HashMap<String, String>();
-        String path = "";
-        try {
-            path = fastDFSClientWrapper.uploadFile(upfile);
-        } catch (IOException e) {
-            System.out.println("富文本框图片上传错误");
-// e.printStackTrace();
-        }
-        System.out.println(path);
-        File file = new File(path);
-        result.put("url", path);
-        result.put("size", String.valueOf(file.length()));
-        result.put("type",
-                file.getName().substring(file.getName().lastIndexOf(".")));
-        result.put("state", "SUCCESS");
-
-        return result;
-    }*/
 }

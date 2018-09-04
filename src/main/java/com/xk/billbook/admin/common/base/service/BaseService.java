@@ -3,6 +3,8 @@ package com.xk.billbook.admin.common.base.service;
 import com.xk.billbook.admin.common.utils.NormalUtils;
 import org.springframework.stereotype.Repository;
 
+import java.util.Map;
+
 @Repository
 public abstract class BaseService<E> {
 
@@ -24,5 +26,20 @@ public abstract class BaseService<E> {
         }
         String result = new NormalUtils().subLastSymbol(sql.toString(),",");
         return result;
+    }
+
+    /**
+     * 简单组装 CONDITION 条件语句
+     * @param colums
+     * @param parmsName
+     * @param parms
+     * @return
+     */
+    public String combineCondition(String[] colums, String[] parmsName,Map<String,Object> parms){
+        StringBuffer condition = new StringBuffer();
+        for (int i = 0; i<parmsName.length; i++){
+
+        }
+        return condition.toString();
     }
 }

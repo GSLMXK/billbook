@@ -43,9 +43,12 @@ public class BillManagerController extends BaseController {
         if(pageSize == null){
             pageSize = 5;
         }
-        PageBean<Map<String,Object>> billPage = billmgrService.findByPage(currentPage, pageSize,id);
-//        List<Map<String,Object>> billList = billmgrService.findAll(id);
+        String[] parmsName = {"searchContent","searchDate"};
+        Map<String,Object> parms = getParms(request,parmsName);
+        PageBean<Map<String,Object>> billPage = billmgrService.findByPage(currentPage, pageSize,id,parms);
+
         map.put("page", billPage);
+        map.put("parms",parms);
         return Base_URL+"list";
     }
 

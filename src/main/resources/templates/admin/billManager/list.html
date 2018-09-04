@@ -1,5 +1,16 @@
 <#include "/admin/head.html">
-
+<script>
+    function initPage(){
+        $('#searchDate').datetimepicker({
+            minView: 'month',
+            format: 'yyyymm',
+            defaultDate: '${parms.searchDate!}'
+        });
+        var startDate = new Date(${parms.searchDate!});
+        alert(startDate);
+        $('#searchDate').data(startDate);
+    }
+</script>
 <div class="admin-content">
 
     <div class="am-cf am-padding">
@@ -19,26 +30,28 @@
                         </button>
                     </div>
 
-                    <div class="am-form-group am-margin-left am-fl">
-                        <select>
-                            <option value="">请选择</option>
-                            <option value="0">出账</option>
-                            <option value="1">入账</option>
-                        </select>
+                </div>
+            </div>
+        </div>
+        <form id="searchForm" action="list">
+            <div class="am-u-md-3 am-cf">
+                <div class="am-fr">
+                    <div class="am-input-group am-input-group-sm">
+                        <input type="text" class="am-form-field" id="searchDate" name="searchDate" value="${parms.searchDate!}" readonly/>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="am-u-md-3 am-cf">
-            <div class="am-fr">
-                <div class="am-input-group am-input-group-sm">
-                    <input type="text" class="am-form-field">
-                    <span class="am-input-group-btn">
-                  <button class="am-btn am-btn-default" type="button">搜索</button>
-                </span>
+            <div class="am-u-md-3 am-cf">
+                <div class="am-fr">
+                    <div class="am-input-group am-input-group-sm">
+                        <input type="text" id="searchContent" class="am-form-field">
+                        <span class="am-input-group-btn">
+                          <button class="am-btn am-btn-default" type="submit">搜索</button>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="am-g">
         <div class="am-u-sm-12">

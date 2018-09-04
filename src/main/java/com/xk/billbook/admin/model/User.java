@@ -31,4 +31,11 @@ public class User extends BaseModel {
         this.photo = photo;
     }
 
+    public String getColumns() {
+        return "id,name,account,password,photo";
+    }
+
+    public String getValues() {
+        return this.getId() + ",'" + this.getName() + "','" + this.getAccount() + "','" + this.getPassword() + "','"+this.getPhoto()+"'";
+    }
 }

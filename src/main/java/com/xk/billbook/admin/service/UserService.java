@@ -31,5 +31,11 @@ public class UserService extends BaseService {
         List<Map<String,Object>> result = userMapper.findByParm(TABLE,"*",condition.toString());
         return result;
     }
-
+    public Integer update(User user) {
+        String[] columns = user.getColumns().split(",");
+        String[] value = user.getValues().split(",");
+        //组装修改sql
+        String values = combineUpdateSql(columns,value);
+        return  userMapper.updateEntity(TABLE,values,user.getId());
+    }
 }
