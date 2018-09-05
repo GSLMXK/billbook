@@ -1,13 +1,11 @@
 package com.xk.billbook.admin.service;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.xk.billbook.admin.common.base.service.BaseService;
-import com.xk.billbook.admin.model.User;
 import com.xk.billbook.admin.mapper.UserMapper;
+import com.xk.billbook.admin.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
