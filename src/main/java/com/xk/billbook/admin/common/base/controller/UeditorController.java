@@ -1,3 +1,4 @@
+/*
 package com.xk.billbook.admin.common.base.controller;
 
 import com.baidu.ueditor.ActionEnter;
@@ -29,3 +30,4 @@ public class UeditorController {
         }
     }
 }
+*/
