@@ -107,6 +107,14 @@
             <artifactId>fastdfs-client</artifactId>
             <version>1.25.2-RELEASE</version>
         </dependency>-->
+
+        <!--获取服务器信息 sigar.jar-->
+        <dependency>
+            <groupId>org.hyperic</groupId>
+            <artifactId>sigar</artifactId>
+            <version>1.6.5.132</version>
+        </dependency>
+
     </dependencies>
 
     <build>
