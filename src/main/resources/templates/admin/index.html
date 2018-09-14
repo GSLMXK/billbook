@@ -6,7 +6,8 @@
         overflow:hidden;
     }
 </style>
-
+<#macro basePath><#if springMacroRequestContext.getContextPath()=="/"><#else>${springMacroRequestContext.getContextPath()}</#if></#macro>
+<#global ctx><@basePath/></#global>
 
 <#include "/admin/main.html">
 

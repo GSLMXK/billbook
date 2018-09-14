@@ -1,6 +1,9 @@
 package com.xk.billbook.admin.common.base.model;
 
+import org.hyperic.sigar.NetInterfaceConfig;
+
 import java.util.Date;
+import java.util.List;
 
 public class ServerInfoVo {
 
@@ -20,7 +23,7 @@ public class ServerInfoVo {
     private String memFree;			//物理内存剩余量
 
     private int cpuNum;				//cpu总数
-    private List<CpuInfoVo> cpuList;//cpu信息
+//    private List<CpuInfoVo> cpuList;//cpu信息
 
     private int netNum;			//网卡总数
     private List<NetInterfaceConfig> netList;	//网卡信息
@@ -172,12 +175,12 @@ public class ServerInfoVo {
     public void setCpuNum(int cpuNum) {
         this.cpuNum = cpuNum;
     }
-    public List<CpuInfoVo> getCpuList() {
+/*    public List<CpuInfoVo> getCpuList() {
         return cpuList;
     }
     public void setCpuList(List<CpuInfoVo> cpuList) {
         this.cpuList = cpuList;
-    }
+    }*/
     public int getNetNum() {
         return netNum;
     }

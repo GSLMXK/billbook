@@ -1,5 +1,7 @@
 package com.xk.billbook.admin.controller;
 
+import com.xk.billbook.admin.common.base.model.ServerInfoVo;
+import com.xk.billbook.admin.common.utils.SystemConfig;
 import com.xk.billbook.admin.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ import java.util.Map;
 public class ReportController {
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private SystemConfig sysCfg;
+
     private final String Base_URL = "admin/report";
     /**
      * 展示统计主页
@@ -45,4 +50,20 @@ public class ReportController {
         result.put("moneyOI",reportService.getPageData(id));
         return result;
     }
+
+
+    /**'
+     * Ajax 获取系统服务器数据
+     * @return
+     */
+    @RequestMapping("/serverData")
+    @ResponseBody
+    public Map<String,Object> getSystemData(HttpServletRequest request){
+        Map<String,Object> result = new HashMap<String,Object>();
+        ServerInfoVo server = sysCfg.getServerInfo(request);
+        result.put("server",server);
+        return result;
+    }
+
+
 }
