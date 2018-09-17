@@ -8,6 +8,7 @@ import com.xk.billbook.admin.common.base.model.BaseModel;
 public class BillType extends BaseModel {
     private Integer type;
     private String comment;
+    private Integer fid;
 
     public Integer getType() {
         return type;
@@ -25,11 +26,19 @@ public class BillType extends BaseModel {
         this.comment = comment;
     }
 
+    public Integer getFid() {
+        return fid;
+    }
+
+    public void setFid(Integer fid) {
+        this.fid = fid;
+    }
+
     public String getColumns() {
-        return "id,name,type,comment";
+        return "id,name,type,comment,f_id";
     }
 
     public String getValues() {
-        return this.getId() + ",'" + this.getName() + "'," + this.getType() + ",'" + this.getComment() + "'";
+        return this.getId() + ",'" + this.getName() + "'," + this.getType() + ",'" + this.getComment() + "','" + this.getFid() + "'";
     }
 }

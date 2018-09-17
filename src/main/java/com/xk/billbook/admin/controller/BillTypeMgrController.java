@@ -48,6 +48,7 @@ public class BillTypeMgrController extends BaseController<BillType> {
 
     @RequestMapping("/add")
     public String toAddPage (Map<String, Object> map){
+        billTypeMgrService.getFType("");
         return Base_URL+"add";
     }
 

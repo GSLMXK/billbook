@@ -23,6 +23,22 @@
 
             <div class="am-g am-margin-top">
                 <div class="am-u-sm-2 am-text-right">
+                    上级类型
+                </div>
+                <div class="am-u-sm-10">
+                    <div class="am-btn-group" data-am-button>
+                        <select name="fid">
+                            <option value="">请选择&nbsp;&nbsp;&nbsp;</option>
+                            <#list fList as type>
+                                <option value=${type.id}>${type.name}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
                     出入账类型
                 </div>
                 <div class="am-u-sm-10">

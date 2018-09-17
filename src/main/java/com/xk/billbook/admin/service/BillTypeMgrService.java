@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class BillTypeMgrService extends BaseService<BillType> {
@@ -21,8 +22,14 @@ public class BillTypeMgrService extends BaseService<BillType> {
     }
 
     public BillType findById(int id) {
-        String selectParm = "*";
+        String selectParm = "id,name,type,comment,f_id as fid";
         return (BillType) billTypeMgrMapper.findById(selectParm,TABLE,id);
+    }
+
+    public List<Map<String,Object>> getFType() {
+        String selectParm = "id,name,type,comment,f_id as fid";
+        String condition = "f_id is null";
+        return billTypeMgrMapper.findByParm(selectParm,TABLE,condition);
     }
 
     public PageBean<BillType> findByPage(int currentPage, int pageSize, int id) {
