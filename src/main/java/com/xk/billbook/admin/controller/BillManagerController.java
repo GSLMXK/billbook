@@ -53,16 +53,18 @@ public class BillManagerController extends BaseController {
     }
 
     @RequestMapping("/add")
-    public String toAddPage (Map<String, Object> map){
-        List typeList = billTypeMgrService.findByList();
+    public String toAddPage (HttpServletRequest request,Map<String, Object> map){
+        int userId = (Integer) request.getSession(true).getAttribute("userId");
+        List typeList = billTypeMgrService.findByList(userId);
         map.put("typeList", typeList);
         return Base_URL+"add";
     }
 
     @RequestMapping("/edit/{id}")
-    public String toEditPage (Map<String, Object> map, @PathVariable int id){
+    public String toEditPage (HttpServletRequest request,Map<String, Object> map, @PathVariable int id){
+        int userId = (Integer) request.getSession(true).getAttribute("userId");
         Bill bill = billmgrService.findById(id);
-        List typeList = billTypeMgrService.findByList();
+        List typeList = billTypeMgrService.findByList(userId);
         map.put("typeList", typeList);
         map.put("bill", bill);
         return Base_URL+"edit";

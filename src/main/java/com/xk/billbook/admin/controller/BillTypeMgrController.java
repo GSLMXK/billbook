@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +28,9 @@ public class BillTypeMgrController extends BaseController<BillType> {
     @Autowired
     BillTypeMgrService billTypeMgrService;
 
-    public List getTypeList() {
-        return billTypeMgrService.findByList();
+    public List getTypeList(HttpServletRequest request) {
+        int id = (Integer) request.getSession(true).getAttribute("userId");
+        return billTypeMgrService.findByList(id);
     }
 
     @RequestMapping("/list")
@@ -48,13 +50,16 @@ public class BillTypeMgrController extends BaseController<BillType> {
 
     @RequestMapping("/add")
     public String toAddPage (Map<String, Object> map){
-        billTypeMgrService.getFType("");
+        List<Map<String,Object>> fList = billTypeMgrService.getFType();
+        map.put("fList", fList);
         return Base_URL+"add";
     }
 
     @RequestMapping("/edit/{id}")
     public String toEditPage (Map<String, Object> map, @PathVariable int id){
         BillType type = billTypeMgrService.findById(id);
+        List<Map<String,Object>> fList = billTypeMgrService.getFType();
+        map.put("fList", fList);
         map.put("type", type);
         return Base_URL+"edit";
     }
