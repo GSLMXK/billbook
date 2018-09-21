@@ -1,4 +1,5 @@
 <#include "/admin/head.html">
+<script src="/static/admin/billTypeMgr/addNedit.js"></script>
 <div class="admin-content">
 
     <div class="am-cf am-padding">
@@ -19,6 +20,27 @@
                     <input type="text" name="name" value="${type.name}" class="am-input-sm">
                 </div>
                 <!--<div class="am-u-sm-6">*必填，不可重复</div>-->
+            </div>
+
+            <div class="am-g am-margin-top">
+                <div class="am-u-sm-2 am-text-right">
+                    上级类型
+                </div>
+                <div class="am-u-sm-10">
+                    <div class="am-btn-group" data-am-button>
+                        <select name="fid" onclick="setType()" id="fid" >
+                            <option value="">无&nbsp;&nbsp;&nbsp;</option>
+                            <#list fList as ftype>
+                                <#if ftype.id == type.fid>
+                                    <option id="foption_${ftype.id}" optType="${ftype.type}" value=${ftype.id} selected="selected">${ftype.name}</option>
+                                <#else>
+                                    <option id="foption_${ftype.id}" optType="${ftype.type}" value=${ftype.id}>${ftype.name}</option>
+                                </#if>
+
+                            </#list>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="am-g am-margin-top">

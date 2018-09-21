@@ -28,7 +28,7 @@ public class BillTypeMgrController extends BaseController<BillType> {
     @Autowired
     BillTypeMgrService billTypeMgrService;
 
-    public List getTypeList(HttpServletRequest request) {
+    public Map<String,Object> getTypeList(HttpServletRequest request) {
         int id = (Integer) request.getSession(true).getAttribute("userId");
         return billTypeMgrService.findByList(id);
     }
@@ -40,9 +40,9 @@ public class BillTypeMgrController extends BaseController<BillType> {
             currentPage = 1;
         }
         if (pageSize == null) {
-            pageSize = 5;
+            pageSize = 10;
         }
-        PageBean<BillType> typePage = billTypeMgrService.findByPage(currentPage, pageSize, id);
+        PageBean<Map<String,Object>> typePage = billTypeMgrService.findByPage(currentPage, pageSize, id);
 //        List<Map<String,Object>> billList = billmgrService.findAll(id);
         map.put("page", typePage);
         return Base_URL + "list";
@@ -74,8 +74,9 @@ public class BillTypeMgrController extends BaseController<BillType> {
     }
 
     @RequestMapping("/save")
-    public String save (BillType type){
+    public String save (HttpServletRequest request,BillType type){
         Integer result = 0;
+        type.setCreatorId((Integer)request.getSession().getAttribute("userId"));
         result = billTypeMgrService.insertBill(type);
         if(result!=null&&result>0){
             return "redirect:/BillType/list";
@@ -84,8 +85,9 @@ public class BillTypeMgrController extends BaseController<BillType> {
     }
 
     @RequestMapping("/update")
-    public String updateBill (BillType type){
+    public String updateBill (HttpServletRequest request,BillType type){
         Integer result = 0;
+        type.setCreatorId((Integer)request.getSession().getAttribute("userId"));
         result = billTypeMgrService.update(type);
         if(result!=null&&result>0){
             return "redirect:/BillType/list";

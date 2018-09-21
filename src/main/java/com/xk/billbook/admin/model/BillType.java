@@ -9,6 +9,7 @@ public class BillType extends BaseModel {
     private Integer type;
     private String comment;
     private Integer fid;
+    private Integer creatorId;
 
     public Integer getType() {
         return type;
@@ -34,11 +35,19 @@ public class BillType extends BaseModel {
         this.fid = fid;
     }
 
+    public Integer getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(Integer creatorId) {
+        this.creatorId = creatorId;
+    }
+
     public String getColumns() {
-        return "id,name,type,comment,f_id";
+        return "id,name,type,comment,f_id,creator_id";
     }
 
     public String getValues() {
-        return this.getId() + ",'" + this.getName() + "'," + this.getType() + ",'" + this.getComment() + "','" + this.getFid() + "'";
+        return this.getId() + ",'" + this.getName() + "'," + this.getType() + ",'" + this.getComment() + "','" + this.getFid() + "'," + this.getCreatorId();
     }
 }

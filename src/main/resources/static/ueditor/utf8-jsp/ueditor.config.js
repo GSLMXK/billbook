@@ -29,7 +29,7 @@
         UEDITOR_HOME_URL: URL
 
         // 服务器统一请求接口路径
-        , serverUrl: ${base}"ueditor/config"
+        , serverUrl: "ueditor/config"
 		,imageUrl:"/ueditor"
 		,imagePath:""
 		,imageFieldName:"upfile"

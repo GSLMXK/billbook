@@ -20,7 +20,7 @@ function search(id){
 }
 //翻页
 function turnPage(page){
-    window.location.href="list?pageSize=5&currentPage="+page;
+    window.location.href="list?pageSize=10&currentPage="+page;
 }
 //获取URL参数
 function getUrlParm(){

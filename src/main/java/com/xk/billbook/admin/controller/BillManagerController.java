@@ -41,7 +41,7 @@ public class BillManagerController extends BaseController {
             currentPage = 1;
         }
         if(pageSize == null){
-            pageSize = 5;
+            pageSize = 10;
         }
         String[] parmsName = {"searchContent","searchDate"};
         Map<String,Object> parms = getParms(request,parmsName);
@@ -55,7 +55,7 @@ public class BillManagerController extends BaseController {
     @RequestMapping("/add")
     public String toAddPage (HttpServletRequest request,Map<String, Object> map){
         int userId = (Integer) request.getSession(true).getAttribute("userId");
-        List typeList = billTypeMgrService.findByList(userId);
+        Map<String,Object> typeList = billTypeMgrService.findByList(userId);
         map.put("typeList", typeList);
         return Base_URL+"add";
     }
@@ -64,7 +64,7 @@ public class BillManagerController extends BaseController {
     public String toEditPage (HttpServletRequest request,Map<String, Object> map, @PathVariable int id){
         int userId = (Integer) request.getSession(true).getAttribute("userId");
         Bill bill = billmgrService.findById(id);
-        List typeList = billTypeMgrService.findByList(userId);
+        Map<String,Object> typeList = billTypeMgrService.findByList(userId);
         map.put("typeList", typeList);
         map.put("bill", bill);
         return Base_URL+"edit";
