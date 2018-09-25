@@ -38,8 +38,12 @@
                     <div class="am-btn-group" data-am-button>
                         <select name="billTypeId">
                             <option value="">请选择&nbsp;&nbsp;&nbsp;</option>
-                            <#list typeList as type>
-                                <option value=${type.id}>${type.name}</option>
+                            <#list typeList.parent as parent>
+                                <optgroup label="${parent.name}">
+                                    <#list typeList[parent.name] as child>
+                                            <option value=${child.id}>${child.name}</option>
+                                    </#list>
+                                </optgroup>
                             </#list>
                         </select>
                         <!--<label class="am-btn am-btn-default am-btn-xs">

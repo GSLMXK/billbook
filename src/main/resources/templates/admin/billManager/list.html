@@ -1,15 +1,5 @@
 <#include "/admin/head.html">
-<script>
-    function initPage(){
-        $('#searchDate').datetimepicker({
-            minView: 'month',
-            format: 'yyyymm',
-            defaultDate: '${parms.searchDate!}'
-        });
-        var startDate = new Date(${parms.searchDate!});
-        $('#searchDate').data(startDate);
-    }
-</script>
+<script src="/static/admin/billManager/list.js"></script>
 <div class="admin-content">
 
     <div class="am-cf am-padding">
@@ -27,6 +17,8 @@
                         </button>
                         <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除
                         </button>
+                        <span>&nbsp;&nbsp;&nbsp;收入：</span><span id="monthIn"></span>
+                        <span>&nbsp;&nbsp;&nbsp;支出</span><span id="monthOut"></span>
                     </div>
 
                 </div>
@@ -43,7 +35,7 @@
             <div class="am-u-md-3 am-cf">
                 <div class="am-fr">
                     <div class="am-input-group am-input-group-sm">
-                        <input type="text" id="searchContent" class="am-form-field">
+                        <input type="text" id="searchContent" name="searchContent" class="am-form-field" value="${parms.searchContent!}" placeholder="账单名/描述">
                         <span class="am-input-group-btn">
                           <button class="am-btn am-btn-default" type="submit">搜索</button>
                         </span>

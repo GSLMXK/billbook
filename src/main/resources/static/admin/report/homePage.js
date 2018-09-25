@@ -19,7 +19,10 @@ function getPageData(){
         }
     });
 }
+//打开账单列表（收入支出之类的）
+function openBillMgrPage(){
 
+}
 function moneyOI(oi){
     $('#out_mon').text(oi[0]['countMoney']);
     $('#in_mon').text(oi[1]['countMoney']);
