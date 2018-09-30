@@ -5,6 +5,9 @@
         ifm.height=document.documentElement.clientHeight-topHeight;
         var leftWidth = $(".admin-sidebar").width();
         ifm.width=document.documentElement.clientWidth-leftWidth-1;
+        if(ifm.width < 890){
+            ifm.width = 890;
+        }
     }
 
     window.onresize=function(){

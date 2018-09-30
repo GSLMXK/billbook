@@ -36,10 +36,8 @@ public class NoticeService extends BaseService<Notice> {
     }
     //修改
     public Integer update(Notice notice) {
-        String[] columns = notice.getColumns().split(",");
-        String[] value = notice.getValues().split(",");
-        //组装修改sql
-        String values = combineUpdateSql(columns,value);
-        return  noticeMapper.updateEntity(TABLE,values,notice.getId());
+        StringBuffer values = new StringBuffer();
+        values.append("id = "+notice.getId()+", content = '"+notice.getContent()+"', create_date = '"+notice.getCreateDate()+"'");
+        return  noticeMapper.updateEntity(TABLE,values.toString(),notice.getId());
     }
 }

@@ -1,21 +1,69 @@
 package com.xk.lifebook.admin.controller;
 
+import com.xk.lifebook.admin.common.base.model.Ueditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/ueditor")
 public class UeditorController {
+    @RequestMapping(value = "/imgUpload")
+    @ResponseBody
+    public Ueditor imgUpload(@RequestParam("action") String param, MultipartFile upfile, HttpServletRequest request) {
+        Ueditor ueditor = new Ueditor();
+        try {
+            ueditor = uploadImg(upfile,request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ueditor;
+    }
+
+    public Ueditor uploadImg(MultipartFile file, HttpServletRequest request) throws IOException {
+        Ueditor ueditor = new Ueditor();
+        String path = request.getSession().getServletContext().getRealPath("ueditor/jsp/upload/image");
+        String ct = file.getContentType();
+        String fileType = "";
+        if (ct.indexOf("/") > 0) {
+            fileType = ct.substring(ct.indexOf("/") + 1);
+        }
+        String fileName = UUID.randomUUID() + "." + fileType;
+        File targetFile = new File(path);
+        if (!targetFile.exists()) {
+            targetFile.mkdirs();
+        }
+        File targetFile2 = new File(path + "/" + fileName);
+        if (!targetFile2.exists()) {
+            targetFile2.createNewFile();
+        }        // 保存
+        try {
+            file.transferTo(targetFile2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ueditor.setState("SUCCESS");
+        ueditor.setTitle(fileName);
+        ueditor.setOriginal(fileName);
+        ueditor.setUrl("/ueditor/jsp/upload/image" + File.separator + fileName);
+        return ueditor;
+    }
+
     /**
      * 富文本配置文件获取
+     *
      * @param request
      * @return
      */
-    @RequestMapping(value = "/config",headers = "Accept=application/json")
+    @RequestMapping(value = "/config", headers = "Accept=application/json")
     @ResponseBody
     public String imgUpload(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("application/json;charset=utf-8");
