@@ -9,7 +9,6 @@ public class BillType extends BaseModel {
     private Integer type;
     private String comment;
     private Integer fid;
-    private Integer creatorId;
 
     public Integer getType() {
         return type;
@@ -33,14 +32,6 @@ public class BillType extends BaseModel {
 
     public void setFid(Integer fid) {
         this.fid = fid;
-    }
-
-    public Integer getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
     }
 
     public String getColumns() {

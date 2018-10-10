@@ -1,9 +1,9 @@
 <#include "/admin/head.html">
-
+<script src="/static/admin/planMgr/js/list.js"></script>
 <div class="admin-content">
 
     <div class="am-cf am-padding">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">公告管理</strong> /
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">资金规划管理</strong> /
             <small>列表</small>
         </div>
     </div>
@@ -41,29 +41,28 @@
                         <th class="table-check"><input type="checkbox"/></th>
                         <th class="table-id">序号</th>
                         <th class="table-title">名称</th>
-                        <th class="table-type">内容</th>
                         <th class="table-type">日期</th>
                         <th class="table-set">操作</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <#list page.items as notice>
+                        <#list page.items as plan>
                         <tr>
                             <td><input type="checkbox"/></td>
-                            <td>${notice_index+1}</td>
-                            <td><a href="#">${notice.name}</a></td>
-                            <td>
-                                ${notice.content}
-                            </td>
-                            <td>${notice.createDate}</td>
+                            <td>${plan_index+1}</td>
+                            <td><a href="#">${plan.name}</a></td>
+                            <td>${plan.createDate}</td>
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button type="button" onclick="edit(${notice.id})" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                        <button type="button" onclick="edit(${plan.id})" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </button>
-                                        <button type="button" onclick="del(${notice.id})" class="am-btn am-btn-default am-btn-xs am-text-danger"><span
+                                        <button type="button" onclick="del(${plan.id})" class="am-btn am-btn-default am-btn-xs am-text-danger"><span
                                                 class="am-icon-trash-o"></span> 删除
+                                        </button>
+                                        <button type="button" onclick="check(${plan.id})" class="am-btn am-btn-default am-btn-xs am-text-success"><span
+                                                class="am-icon-trash-o"></span> 查看
                                         </button>
                                     </div>
                                 </div>

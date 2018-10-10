@@ -8,7 +8,6 @@ import java.util.Date;
 @Data
 public class Notice extends BaseModel {
     private String content;
-    private Date createDate;
 
     public String getColumns() {
         return "id,name,content,create_date";

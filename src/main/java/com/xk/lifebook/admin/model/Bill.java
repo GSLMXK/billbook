@@ -13,8 +13,6 @@ import java.util.Date;
 public class Bill extends BaseModel {
     private Integer billTypeId;
     private BigDecimal money;
-    private String description;
-    private Integer creatorId;
     private Date billDate;
 
     public Integer getBillTypeId() {
@@ -31,22 +29,6 @@ public class Bill extends BaseModel {
 
     public void setMoney(BigDecimal money) {
         this.money = money;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(Integer creatorId) {
-        this.creatorId = creatorId;
     }
 
     public Date getBillDate() {
