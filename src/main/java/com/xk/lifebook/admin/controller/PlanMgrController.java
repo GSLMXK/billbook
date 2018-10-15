@@ -38,8 +38,8 @@ public class PlanMgrController extends BaseController<Plan> {
 
     @RequestMapping("/edit/{id}")
     public String toEditPage (Map<String, Object> map, @PathVariable int id){
-        Plan notice = planService.findById(id);
-        map.put("notice", notice);
+        Plan plan = planService.findById(id);
+        map.put("plan", plan);
         return Base_URL+"edit";
     }
 

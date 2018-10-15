@@ -44,7 +44,7 @@ public class BillManagerService extends BaseService<Bill> {
     public PageBean<Map<String,Object>> findByPage(int currentPage, int pageSize, int id, Map<String,Object> parms) {
         String selectParm = "bill.id,bill.name,bill.billType_id billTypeId,bill.money,u.name creatorName,bill.bill_date billDate,type.name typeName";
         String tableParm = "lb_bill bill left join lb_billType type on type.id = bill.billType_id left join lb_user u on u.id = bill.creator_id";
-        String condition = "bill.creator_id = "+id+combineCondition(parms)+" order by bill_date desc";
+        String condition = "bill.creator_id = "+id+combineCondition(parms)+" order by bill.bill_date desc, bill.id asc";
         //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
         PageHelper.startPage(currentPage, pageSize);
         List<Map<String,Object>> allItems = billMapper.findByParm(tableParm,selectParm,condition);        //全部账单

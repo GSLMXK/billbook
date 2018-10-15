@@ -23,7 +23,7 @@ public class PlanMgrService extends BaseService<Plan> {
     }
 
     public Plan findById(int id) {
-        String selectParm = "id,name,content,create_date createDate";
+        String selectParm = "id,name,create_date createDate";
         return (Plan) planMgrMapper.findById(selectParm,TABLE,id);
     }
 
