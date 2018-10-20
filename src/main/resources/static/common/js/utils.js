@@ -78,7 +78,8 @@ function search(id){
 }
 //翻页
 function turnPage(page){
-    window.location.href="list?pageSize=10&currentPage="+page;
+    var action = "list?pageSize=10&currentPage="+page;
+    $("#searchForm").attr("action",action).submit();
 }
 //获取URL参数
 function getUrlParm(){

@@ -3,6 +3,7 @@ package com.xk.lifebook.admin.controller;
 import com.xk.lifebook.admin.common.base.controller.BaseController;
 import com.xk.lifebook.admin.common.base.model.PageBean;
 import com.xk.lifebook.admin.model.Plan;
+import com.xk.lifebook.admin.service.BillTypeMgrService;
 import com.xk.lifebook.admin.service.PlanMgrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -18,7 +20,8 @@ public class PlanMgrController extends BaseController<Plan> {
     private final String Base_URL = "admin/planMgr/";
     @Autowired
     PlanMgrService planService;
-
+    @Autowired
+    BillTypeMgrService billTypeMgrService;
     @RequestMapping("/list")
     public String findAll(HttpServletRequest request, Map<String, Object> map, Integer currentPage, Integer pageSize) {
         int id = (Integer) request.getSession(true).getAttribute("userId");
@@ -37,9 +40,13 @@ public class PlanMgrController extends BaseController<Plan> {
     }
 
     @RequestMapping("/edit/{id}")
-    public String toEditPage (Map<String, Object> map, @PathVariable int id){
+    public String toEditPage (HttpServletRequest request, Map<String, Object> map, @PathVariable int id){
+        int userId = (Integer) request.getSession(true).getAttribute("userId");
         Plan plan = planService.findById(id);
+        List<Map<String,Object>> details = planService.findDetails(id);
+        Map<String,Object> typeList = billTypeMgrService.findByList(userId);
         map.put("plan", plan);
+        map.put("details", details);
         return Base_URL+"edit";
     }
 

@@ -21,16 +21,18 @@
                 </div>
             </div>
         </div>
-        <div class="am-u-md-3 am-cf">
-            <div class="am-fr">
-                <div class="am-input-group am-input-group-sm">
-                    <input type="text" class="am-form-field">
-                    <span class="am-input-group-btn">
-                  <button class="am-btn am-btn-default" type="button">搜索</button>
-                </span>
+        <form id="searchForm" action="list" method="post">
+            <div class="am-u-md-3 am-cf">
+                <div class="am-fr">
+                    <div class="am-input-group am-input-group-sm">
+                        <input type="text" id="searchContent" name="searchContent" class="am-form-field" value="${parms.searchContent!}" placeholder="账单名/描述">
+                        <span class="am-input-group-btn">
+                          <button class="am-btn am-btn-default" type="submit">搜索</button>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="am-g">
         <div class="am-u-sm-12">

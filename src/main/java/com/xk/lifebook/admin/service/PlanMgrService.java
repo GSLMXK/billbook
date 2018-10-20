@@ -26,7 +26,13 @@ public class PlanMgrService extends BaseService<Plan> {
         String selectParm = "id,name,create_date createDate";
         return (Plan) planMgrMapper.findById(selectParm,TABLE,id);
     }
-
+    //查询计划明细项
+    public List<Map<String,Object>> findDetails(Integer id){
+        String selectParm = "d.*,type.*";
+        String tableParm = " lb_plan_detail d left join lb_billType type on d.billType_id = type.id ";
+        String condition = " d.id = "+id+" order by d.id desc";
+        return planMgrMapper.findByParm(tableParm,selectParm,condition);
+    }
     public PageBean<Map<String,Object>> findByPage(int currentPage, int pageSize, int id, Map<String,Object> parms) {
         String selectParm = "plan.id,plan.name,plan.create_date createDate,plan.is_default isDefault, plan.description";
         String tableParm = "lb_plan plan ";
