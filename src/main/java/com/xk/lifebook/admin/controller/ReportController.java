@@ -1,5 +1,6 @@
 package com.xk.lifebook.admin.controller;
 
+import com.xk.lifebook.admin.common.base.controller.BaseController;
 import com.xk.lifebook.admin.common.base.model.ServerInfoVo;
 import com.xk.lifebook.admin.common.utils.SystemConfig;
 import com.xk.lifebook.admin.service.ReportService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +21,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/Report")
-public class ReportController {
+public class ReportController extends BaseController {
     @Autowired
     private ReportService reportService;
     @Autowired
@@ -63,5 +65,20 @@ public class ReportController {
         return result;
     }
 
+    /**
+     * 展示统计主页
+     * @return
+     */
+    @RequestMapping("/reportPage")
+    public String toReportPage (HttpServletRequest request,Map<String, Object> map){
+        String name = "";
+        Integer userId = (Integer)request.getSession(true).getAttribute("userId");
+        String[] parmsName = {"type","month"};
+        Map<String,Object> parms = getParms(request,parmsName);
+        List<Map<String, Object>> reportList = reportService.getReportData(userId,parms);
+        map.put("reportList", reportList);
+        //获取账单统计
+        return Base_URL+"/reportPage";
+    }
 
 }
