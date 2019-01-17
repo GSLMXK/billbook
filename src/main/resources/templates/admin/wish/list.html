@@ -1,0 +1,87 @@
+<#include "/admin/head.html">
+<script src="/static/admin/wish/list.js"></script>
+<div class="admin-content">
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">我的心愿</strong> /
+            <small>列表</small>
+        </div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-md-6 am-cf">
+            <div class="am-fl am-cf">
+                <div class="am-btn-toolbar am-fl">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <button type="button" onclick="openModal('add-modal',null,null)" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增
+                        </button>
+                        <span>&nbsp;&nbsp;&nbsp;剩余存款：</span><span id="saveLeft">&nbsp;</span>
+                        <span>&nbsp;&nbsp;&nbsp;已使用：</span><span id="used">&nbsp;</span>
+                        <span>&nbsp;&nbsp;&nbsp;历史总存款：</span><span id="history">&nbsp;</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-6">
+            <ul class="am-list admin-content-file">
+                <#list page.items as item>
+                    <li>
+                        <strong><span class="am-icon-upload"></span> ${item.name}</strong>
+                        <#if item.is_finished == 0>
+                            <button type="button" onclick="openModal('add-modal',getWish(${item.id}),null)" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 分配</button>
+                            <button type="button" onclick="finishWish(${item.id})" class="am-btn am-btn-default"><span class="am-icon-check"></span> 完成</button>
+                        </#if>
+                        <p>${item.money_in}/${item.money}</p>
+                        <#if item.is_finished == 0>
+                            <div class="am-progress am-progress-striped am-progress-sm am-active">
+                                <div class="am-progress-bar am-progress-bar-success" style="width: ${item.money_in / item.money * 100.00}%">${item.money_in / item.money * 100.00}%</div>
+                            </div>
+                        </#if>
+                    </li>
+                </#list>
+            </ul>
+        </div>
+    </div>
+    <div class="am-modal confirm-list" tabindex="-1" id="add-modal">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">
+                新增心愿<a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+            </div>
+            <form id="addForm">
+                <div class="am-modal-bd">
+                    <div class="am-u-sm-3 am-text-right">
+                        心愿名称
+                    </div>
+                    <div class="am-u-sm-9">
+                        <p><input type="text" id="wishName" name="name" value="" class="am-form-field"/></p>
+                    </div>
+                    <div class="am-u-sm-3 am-text-right">
+                        心愿资金
+                    </div>
+                    <div class="am-u-sm-9">
+                        <p><input type="text" id="wishMoney" name="money" value="0" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="am-form-field"/></p>
+                    </div>
+                    <div class="am-u-sm-3 am-text-right">
+                        已分配
+                    </div>
+                    <div class="am-u-sm-9">
+                        <p><input type="text" id="moneyIn" name="moneyIn" value="0" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" class="am-form-field"/></p>
+                    </div>
+                    <div class="am-u-sm-3 am-text-right">
+                        备注
+                    </div>
+                    <div class="am-u-sm-9">
+                        <p><textarea type="text" id="wishComment" name="comment" value="" class="am-form-field" ></textarea></p>
+                    </div>
+                    <input type="hidden" id="isFinished" name="isFinished" value="0" />
+                    <input type="hidden" id="wishId" name="id" value="" />
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                    <span class="am-modal-btn" data-am-modal-confirm onclick="saveWish()">确定</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

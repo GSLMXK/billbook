@@ -15,6 +15,10 @@ import java.util.Map;
 @RequestMapping("/Notice")
 public class NoticeController extends BaseController<Notice> {
     private final String Base_URL = "admin/notice/";
+//    @Override
+    public String getBaseUrl() {
+        return Base_URL;
+    }
     @Autowired
     NoticeService noticeService;
 

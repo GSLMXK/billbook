@@ -4,10 +4,38 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NormalUtils {
+    /**
+     * 获取现在时间
+     *
+     * @return返回长时间格式 yyyy-MM-dd HH:mm:ss
+     */
+    public Date getNowDate() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formatter.format(currentTime);
+        ParsePosition pos = new ParsePosition(8);
+        Date currentTime_2 = formatter.parse(dateString, pos);
+        return currentTime_2;
+    }
 
+    /**
+     * 获取现在时间
+     *
+     * @return返回短时间格式 yyyy-MM-dd
+     */
+    public Date getNowDateShort() {
+        Date currentTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = formatter.format(currentTime);
+        ParsePosition pos = new ParsePosition(8);
+        Date currentTime_2 = formatter.parse(dateString, pos);
+        return currentTime_2;
+    }
 
     //去除最后一个特殊符号
     public String subLastSymbol(String str, String Symbol){

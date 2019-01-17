@@ -1,16 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<!-- Chart -->
+<#include "/admin/head.html">
 <script src="/static/Chart/js/Chart.bundle.js"></script>
 <script src="/static/admin/report/reportPage.js"></script>
 <body>
-<#list reportList as item>
-<div>${item.pTypeName} - ${item.typeName}: ${item.countMoney}</div>
-</#list>
+<div class="am-g">
+    <div class="am-u-md-3 am-cf">
+        <div class="am-fr">
+            <div class="am-input-group am-input-group-sm">
+                <input type="text" class="am-form-field" id="searchDate" name="searchDate" value="${parms.searchDate!}" readonly/>
+                <span class="am-input-group-btn">
+                  <button class="am-btn am-btn-default" onclick="clearCanvas(); getData()">搜索</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="am-g">
+    <div class="am-u-md-3 am-cf" id="details">
+
+    </div>
+</div>
 <div id="canvas-holder" style="width:40%">
     <canvas id="chart-area"></canvas>
 </div>

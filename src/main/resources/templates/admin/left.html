@@ -6,7 +6,7 @@
         <li class="admin-parent">
             <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 我的账单 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
             <ul class="am-list admin-sidebar-sub am-collapse" id="collapse-nav" style="height: 0px;">
-                <li><a href="/BillMgr/add" target="rightFrame" class="am-cf"><span class="am-icon-check"></span> 我要记账<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                <li><a href="/BillMgr/add" target="rightFrame" class="am-cf"><span class="am-icon-print"></span> 我要记账<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
                 <li><a href="/BillMgr/list" target="rightFrame"><span class="am-icon-puzzle-piece"></span> 账单管理</a></li>
                 <li><a href="/BillType/list" target="rightFrame"><span class="am-icon-th"></span>账单类型管理<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
             </ul>
@@ -18,13 +18,20 @@
                 <li><a href="/PlanMgr/list" target="rightFrame"><span class="am-icon-puzzle-piece"></span> 资金规划管理</a></li>
             </ul>
         </li>
+        <li class="admin-parent">
+            <a class="am-cf" data-am-collapse="{target: '#wish-nav'}"><span class="am-icon-heart"></span> 心愿存款 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+            <ul class="am-list admin-sidebar-sub am-collapse" id="wish-nav" style="height: 0px;">
+                <li><a href="/Wish/list" target="rightFrame"><span class="am-icon-credit-card"></span>存款管理<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
+                <li><a href="/Wish/list" target="rightFrame"><span class="am-icon-heart-o"></span> 我的心愿</a></li>
+            </ul>
+        </li>
         <li><a href="admin-table.html"><span class="am-icon-table"></span> 日志</a></li>
         <li><a href="/Notice/list" target="rightFrame"><span class="am-icon-pencil-square-o"></span> 公告管理</a></li>
         <li class="admin-parent">
-            <a class="am-cf" data-am-collapse="{target: '#report-nav'}"><span class="am-icon-line-chart"></span> 账单统计 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+            <a class="am-cf" data-am-collapse="{target: '#report-nav'}"><span class="am-icon-pie-chart"></span> 账单统计 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
             <ul class="am-list admin-sidebar-sub am-collapse" id="report-nav" style="height: 0px;">
-                <li><a href="/Report/reportPage?type=1" target="rightFrame" class="am-cf"><span class="am-icon-check"></span> 入账统计<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-                <li><a href="/Report/reportPage?type=0" target="rightFrame"><span class="am-icon-puzzle-piece"></span> 出账统计</a></li>
+                <li><a href="/Report/reportPage?type=1" target="rightFrame" class="am-cf"><span class="am-icon-sign-in"></span> 入账统计<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                <li><a href="/Report/reportPage?type=0" target="rightFrame"><span class="am-icon-sign-out"></span> 出账统计</a></li>
                 <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 统计分析<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
                 <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
                 <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>

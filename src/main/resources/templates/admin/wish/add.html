@@ -1,12 +1,9 @@
 <#include "/admin/head.html">
 <script>
     function initPage(){
-        //余额转入存款
         var money = getUrlParm('left_m');
-        if(money){
+        if(money!=''){
             $('#money').val(money);
-            $('#description').text('余额转入存款');
-            $('#bill_name').val('余额转入存款');
         }
         $('#billDate').datetimepicker({
             minView: 'month',
@@ -31,7 +28,7 @@
                 </div>
                 <div class="am-u-sm-10">
                     <!--<input type="hidden" name="creatorId" value="1" />-->
-                    <input type="text" name="name" id="bill_name" value="流水账" class="am-input-sm">
+                    <input type="text" name="name" value="流水账" class="am-input-sm">
                 </div>
                 <!--<div class="am-u-sm-6">*必填，不可重复</div>-->
             </div>
@@ -86,7 +83,7 @@
                     描述
                 </div>
                 <div class="am-u-sm-10">
-                    <textarea rows="10" id="description" name="description"></textarea>
+                    <textarea rows="10" name="description"></textarea>
                 </div>
             </div>
             <div class="am-margin">

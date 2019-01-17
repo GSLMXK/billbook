@@ -18,6 +18,10 @@ import java.util.Map;
 @RequestMapping("/PlanMgr")
 public class PlanMgrController extends BaseController<Plan> {
     private final String Base_URL = "admin/planMgr/";
+//    @Override
+    public String getBaseUrl() {
+        return Base_URL;
+    }
     @Autowired
     PlanMgrService planService;
     @Autowired

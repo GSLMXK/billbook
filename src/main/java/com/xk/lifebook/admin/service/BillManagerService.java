@@ -18,6 +18,11 @@ public class BillManagerService extends BaseService<Bill> {
     @Autowired
     BillManagerMapper billMapper;
 
+    @Override
+    public String getTable() {
+        return TABLE;
+    }
+
     //
     public Bill findById(int id) {
         String selectParm = "id,name,billType_id billTypeId,money,bill_date billDate,description, creator_id creatorId";
@@ -75,9 +80,9 @@ public class BillManagerService extends BaseService<Bill> {
     }
     //获取月收支信息
     public List<Map<String,Object>> getMonthData(Integer id,String month){
-        String selectParm = "type.type, sum(bill.money) countMoney";
-        String table = "lb_bill bill left join lb_billType type on bill.billType_id = type.id ";
-        String condition = " bill.creator_id = "+id+" and DATE_FORMAT( bill.bill_date, '%Y-%m' ) = '"+month+"' GROUP BY type.type ";
+        String selectParm = "type.type, IFNULL(sum(bill.money),0) countMoney";
+        String table = "lb_billType type LEFT JOIN (SELECT bill.billType_id,bill.money FROM lb_bill bill WHERE bill.creator_id = "+id+" and DATE_FORMAT( bill.bill_date, '%Y-%m' ) = '"+month+"' ) bill on bill.billType_id = type.id";
+        String condition = " type.creator_id = "+id+" GROUP BY type.type ";
         return billMapper.findByParm(table,selectParm,condition);
     }
 

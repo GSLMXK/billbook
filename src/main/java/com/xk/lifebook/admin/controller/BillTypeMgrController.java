@@ -23,6 +23,10 @@ import java.util.Map;
 public class BillTypeMgrController extends BaseController<BillType> {
 
     private final String Base_URL = "admin/billTypeMgr/";
+//    @Override
+    public String getBaseUrl() {
+        return Base_URL;
+    }
     @Autowired
     BillTypeMgrService billTypeMgrService;
 
@@ -32,8 +36,8 @@ public class BillTypeMgrController extends BaseController<BillType> {
     }
 
     @RequestMapping("/list")
-    public String findAll(Map<String, Object> map, Integer currentPage, Integer pageSize) {
-        int id = 1;
+    public String findAll(HttpServletRequest request, Map<String, Object> map, Integer currentPage, Integer pageSize) {
+        int id = (Integer) request.getSession(true).getAttribute("userId");
         if (currentPage == null) {
             currentPage = 1;
         }
@@ -46,17 +50,20 @@ public class BillTypeMgrController extends BaseController<BillType> {
         return Base_URL + "list";
     }
 
+
     @RequestMapping("/add")
-    public String toAddPage (Map<String, Object> map){
-        List<Map<String,Object>> fList = billTypeMgrService.getFType();
+    public String toAddPage (HttpServletRequest request, Map<String, Object> map){
+        int userId = (Integer) request.getSession(true).getAttribute("userId");
+        List<Map<String,Object>> fList = billTypeMgrService.getFType(userId);
         map.put("fList", fList);
         return Base_URL+"add";
     }
 
     @RequestMapping("/edit/{id}")
-    public String toEditPage (Map<String, Object> map, @PathVariable int id){
+    public String toEditPage (HttpServletRequest request, Map<String, Object> map, @PathVariable int id){
         BillType type = billTypeMgrService.findById(id);
-        List<Map<String,Object>> fList = billTypeMgrService.getFType();
+        int userId = (Integer) request.getSession(true).getAttribute("userId");
+        List<Map<String,Object>> fList = billTypeMgrService.getFType(userId);
         map.put("fList", fList);
         map.put("type", type);
         return Base_URL+"edit";

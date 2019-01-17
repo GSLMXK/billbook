@@ -21,6 +21,11 @@ import java.util.Map;
 public class UserController extends BaseController {
     @Autowired
     private UserService userService;
+    private final String Base_URL = "admin/user";
+//    @Override
+    public String getBaseUrl() {
+        return Base_URL;
+    }
 
     @RequestMapping("/{id}")
     public String selectUser (@PathVariable int id){

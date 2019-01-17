@@ -9,7 +9,7 @@ rem 关闭项目进程
 kill -9 $(ps -ef|grep billBook.jar|gawk '$0 !~/grep/ {print $2}' |tr -s '\n' ' ')
 echo 正在重新启动项目。。
 rem 启动项目
-nohup  java -jar /opt/java/billBook/billBook.jar &
+nohup  java -jar /opt/java/lifeBook/lifebook.jar &
 
 echo 重启完成。。
 echo. & pause

@@ -49,23 +49,15 @@
                 </div>
                 <div class="am-u-sm-10">
                     <div class="am-btn-group" data-am-button>
-
-                        <#if type.type == 0>
                             <label class="am-btn am-btn-default am-btn-xs am-active">
-                            <input type="radio" name="type" value="0" id="option1" checked="checked"> 出账
+                                <input type="radio" name="type" value="0" id="option1" <#if type.type == 0>checked="checked"</#if>> 出账
                             </label>
                             <label class="am-btn am-btn-default am-btn-xs">
-                            <input type="radio" name="type" value="1" id="option2"> 入账
+                                <input type="radio" name="type" value="1" id="option2" <#if type.type == 1>checked="checked"</#if>> 入账
                             </label>
-                        <#else>
                             <label class="am-btn am-btn-default am-btn-xs">
-                            <input type="radio" name="type" value="0" id="option1"> 出账
+                                <input type="radio" name="type" value="2" id="option3" <#if type.type == 2>checked="checked"</#if>> 存款
                             </label>
-                            <label class="am-btn am-btn-default am-btn-xs am-active">
-                            <input type="radio" name="type" value="1" id="option2" checked="checked"> 入账
-                            </label>
-                        </#if>
-
                     </div>
                 </div>
             </div>

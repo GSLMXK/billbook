@@ -28,6 +28,13 @@ function getBillInfo(){
             var oi = json['moneyOI'];
             $('#monthIn').text(oi[1]['countMoney']);
             $('#monthOut').text(oi[0]['countMoney']);
+            $('#monthSave').text(oi[2]['countMoney']);
+            $('#monthLeft').text((oi[1]['countMoney']-oi[0]['countMoney']-oi[2]['countMoney']).toFixed(2));
         }
     });
+}
+//余额转入存款
+function leftToSave(){
+    var left = $('#monthLeft').text();
+    window.location.href="add?left_m="+left;
 }

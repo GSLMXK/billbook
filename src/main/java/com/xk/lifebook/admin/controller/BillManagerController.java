@@ -22,12 +22,17 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/BillMgr")
-public class BillManagerController extends BaseController {
+public class BillManagerController extends BaseController<Bill> {
     private final String Base_URL = "admin/billManager/";
     @Autowired
     BillManagerService billmgrService;
     @Autowired
     BillTypeMgrService billTypeMgrService;
+
+//    @Override
+    public String getBaseUrl() {
+        return Base_URL;
+    }
     @RequestMapping("/{id}")
     public Bill findById (@PathVariable int id){
         return (Bill)billmgrService.findById(id);
@@ -50,6 +55,7 @@ public class BillManagerController extends BaseController {
         map.put("parms",parms);
         return Base_URL+"list";
     }
+
 
     @RequestMapping("/add")
     public String toAddPage (HttpServletRequest request,Map<String, Object> map){
@@ -90,9 +96,10 @@ public class BillManagerController extends BaseController {
     }
 
     @RequestMapping("/save")
-    public String save (Bill bill){
+    public String save (HttpServletRequest request,Bill bill){
         Integer result = 0;
-        bill.setCreatorId(1);
+        int userId = (Integer) request.getSession(true).getAttribute("userId");
+        bill.setCreatorId(userId);
         result = billmgrService.insertBill(bill);
         if(result!=null&&result>0){
             return "redirect:/BillMgr/list";

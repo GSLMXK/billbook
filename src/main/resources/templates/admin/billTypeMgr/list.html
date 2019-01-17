@@ -57,7 +57,12 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <#assign parent="" />
                         <#list page.items as type>
+                        <#if parent == "" || parent!=type.pName>
+                            <#assign parent = type.pName />
+                            <tr><td colspan="6">${parent}</td></tr>
+                        </#if>
                         <tr>
                             <td><input type="checkbox"/></td>
                             <td>${type_index+1}</td>
@@ -65,8 +70,10 @@
                             <td>
                                 <#if type.type==0>
                                     出账
-                                <#else>
+                                <#elseif type.type==1>
                                     入账
+                                <#else>
+                                    存款
                                 </#if>
                             </td>
                             <td>${type.comment}</td>

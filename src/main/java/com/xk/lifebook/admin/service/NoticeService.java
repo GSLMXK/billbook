@@ -15,7 +15,10 @@ public class NoticeService extends BaseService<Notice> {
     private final String TABLE = "lb_notice";
     @Autowired
     NoticeMapper noticeMapper;
-
+    @Override
+    public String getTable() {
+        return TABLE;
+    }
     public List findByList(){
         return noticeMapper.findByList(TABLE);
     }

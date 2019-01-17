@@ -14,7 +14,10 @@ public class UserService extends BaseService {
     private final String TABLE = "lb_user";
     @Autowired
     UserMapper userMapper;
-
+    @Override
+    public String getTable() {
+        return TABLE;
+    }
     public User selectUser(int id) {
         return (User)userMapper.findById(new User().getColumn(),TABLE,id);
     }

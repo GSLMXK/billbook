@@ -9,9 +9,13 @@ import java.util.List;
 import java.util.Map;
 @Repository
 public class ReportService extends BaseService {
+    private final String TABLE = "";
     @Autowired
     ReportMapper reportMapper;
-
+    @Override
+    public String getTable() {
+        return TABLE;
+    }
     //获取首页统计数据
     public List<Map<String, Object>> getPageData(Integer id) {
         String selectParm = "type.type, sum(bill.money) countMoney";

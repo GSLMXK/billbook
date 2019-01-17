@@ -60,10 +60,21 @@ function editorShow(contentEle,showEle,isShow){
         return true;
     }
 }
+//打开模态框
+function openModal(modalId,modalBefore,modelAfter){
+    if(modalBefore){
+        modalBefore();
+    }
+    $('#'+modalId).modal();
+    if(modelAfter){
+        modelAfter();
+    }
+}
 //添加
 function add(){
     window.location.href="add";
 }
+
 //修改
 function edit(id){
     window.location.href="edit/"+id;
@@ -82,8 +93,13 @@ function turnPage(page){
     $("#searchForm").attr("action",action).submit();
 }
 //获取URL参数
-function getUrlParm(){
-
+function getUrlParm(paramName){
+    var paramValue = "", isFound = !1;
+    if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
+        var arrSource = unescape(this.location.search).substring(1, this.location.search.length).split("&"), i = 0;
+        while (i < arrSource.length && !isFound) arrSource[i].indexOf("=") > 0 && arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase() && (paramValue = arrSource[i].split("=")[1], isFound = !0), i++
+    }
+    return paramValue == "" && (paramValue = null), paramValue
 }
 //获取公告
 function getNotice(){

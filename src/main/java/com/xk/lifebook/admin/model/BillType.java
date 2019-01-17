@@ -39,6 +39,6 @@ public class BillType extends BaseModel {
     }
 
     public String getValues() {
-        return this.getId() + ",'" + this.getName() + "'," + this.getType() + ",'" + this.getComment() + "','" + this.getFid() + "'," + this.getCreatorId();
+        return this.getId() + ",'" + this.getName() + "'," + this.getType() + ",'" + this.getComment() + "'," + this.getFid() + "," + this.getCreatorId();
     }
 }

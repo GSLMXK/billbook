@@ -1,77 +1,71 @@
-var randomScalingFactor = function() {
-    return Math.round(Math.random() * 100);
-};
-var config = {
-    type: 'pie',
-    data: {
-        datasets: [{
-            data: [
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-                randomScalingFactor(),
-            ],
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
-            ],
-            label: 'Dataset 1'
-        }],
-        labels: [
-            'Red',
-            'Orange',
-            'Yellow',
-            'Green',
-            'Blue'
-        ]
-    },
-    options: {
-        responsive: true
+function initPage(){
+    var searchDate = $("#searchDate").val();
+    if(searchDate == ""){
+        searchDate = dateFtt("yyyy-MM",new Date());
+        $("#searchDate").val(searchDate);
     }
-};
-
-window.onload = function() {
-    var ctx = document.getElementById('chart-area').getContext('2d');
-    window.myPie = new Chart(ctx, config);
-};
-
-document.getElementById('randomizeData').addEventListener('click', function() {
-    config.data.datasets.forEach(function(dataset) {
-        dataset.data = dataset.data.map(function() {
-            return randomScalingFactor();
-        });
+    $('#searchDate').datetimepicker({
+        minView: 'month',
+        format: 'yyyy-mm',
+        initialDate: searchDate,
+        autoclose:true
     });
+    getData();
+}
 
-    window.myPie.update();
-});
-
-var colorNames = Object.keys(window.chartColors);
-document.getElementById('addDataset').addEventListener('click', function() {
-    var newDataset = {
-        backgroundColor: [],
-        data: [],
-        label: 'New dataset ' + config.data.datasets.length,
-    };
-
-    for (var index = 0; index < config.data.labels.length; ++index) {
-        newDataset.data.push(randomScalingFactor());
-
-        var colorName = colorNames[index % colorNames.length];
-        var newColor = window.chartColors[colorName];
-        newDataset.backgroundColor.push(newColor);
+function randomColor() {
+    var r=Math.floor(Math.random()*256);
+    var g=Math.floor(Math.random()*256);
+    var b=Math.floor(Math.random()*256);
+    return "rgb("+r+','+g+','+b+")";
+}
+//加载饼图
+function loadPieData(pageData) {
+    var i = 0;
+    var labels = [], data=[], backgroundColor=[];
+    var details = "";
+    for(var key in pageData) {
+        details += "<div>" + pageData[key]['pTypeName'] + "-" + pageData[key]['typeName'] + "：" + pageData[key]['countMoney'] + "</div>";
+        // 遍历json字符串,将json字符串插入到新建的两个数组中,填充饼状的数据
+        labels.push(pageData[key]['typeName']);
+        data.push(parseFloat(pageData[key]['countMoney']));
+        backgroundColor.push(randomColor());
     }
-
-    config.data.datasets.push(newDataset);
-    window.myPie.update();
-});
-
-document.getElementById('removeDataset').addEventListener('click', function() {
-    config.data.datasets.splice(0, 1);
-    window.myPie.update();
-});
+    $('#details').html(details);
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: data,
+                backgroundColor: backgroundColor,
+            }],
+            labels: labels
+        },
+        options: {
+            responsive: true
+        }
+    };
+    var ctx = document.getElementById('chart-area').getContext('2d');
+    var myBarChart = new Chart(ctx, config);
+}
+//获取页面数据
+function getData(){
+    var type = getUrlParm('type');
+    type = type==null?0:type;
+    var url = "/Report/reportPageData";
+    var data = {type:type,month:$("#searchDate").val()};
+    $.ajax({
+        type : "POST",
+        url : url,
+        data : data,
+        dataType : "json",
+        async: false,
+        success : function(json) {
+            loadPieData(json['reportList']);
+        }
+    });
+}
+function clearCanvas(){
+    $('#chart-area').remove();
+    $('#canvas-holder').append('<canvas id="chart-area"></canvas>');
+}

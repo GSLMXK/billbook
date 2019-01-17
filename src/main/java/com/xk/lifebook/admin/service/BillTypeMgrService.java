@@ -17,7 +17,10 @@ public class BillTypeMgrService extends BaseService<BillType> {
     private final String TABLE = "lb_billType";
     @Autowired
     BillTypeMgrMapper billTypeMgrMapper;
-
+    @Override
+    public String getTable() {
+        return TABLE;
+    }
     public Map<String,Object> findByList(Integer userId){
         String parentCondition = TABLE+" WHERE creator_id = "+userId+" and f_id is null ORDER BY id DESC";
         List<BillType> plist =  billTypeMgrMapper.findByList(parentCondition);
@@ -39,19 +42,20 @@ public class BillTypeMgrService extends BaseService<BillType> {
         return (BillType) billTypeMgrMapper.findById(selectParm,TABLE,id);
     }
 
-    public List<Map<String,Object>> getFType() {
+    public List<Map<String,Object>> getFType(Integer userId) {
         String selectParm = "id,name,type,comment,f_id as fid";
-        String condition = "f_id is null";
+        String condition = "f_id is null and creator_id="+userId;
         return billTypeMgrMapper.findByParm(TABLE,selectParm,condition);
     }
 
     public PageBean<Map<String,Object>> findByPage(int currentPage, int pageSize, int userId) {
-        String selectParm = "*";
-        String condition = "creator_id = "+userId+" order by id desc";
+        String selectParm = "c.*,p.name pName ";
+        String table = " lb_billType c left join lb_billType p on p.id = c.f_id ";
+        String condition = " c.creator_id = "+userId+" and c.f_id is not null order by c.f_id, c.id desc";
         //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
         PageHelper.startPage(currentPage, pageSize);
-        List<Map<String,Object>> allItems = billTypeMgrMapper.findByParm(TABLE,selectParm,condition);        //用户账单类型
-        int countNums = billTypeMgrMapper.countList(TABLE,condition);            //总记录数
+        List<Map<String,Object>> allItems = billTypeMgrMapper.findByParm(table,selectParm,condition);        //用户账单类型
+        int countNums = billTypeMgrMapper.countList(table,condition);            //总记录数
         PageBean<Map<String,Object>> pageData = new PageBean<Map<String,Object>>(currentPage, pageSize, countNums);
         pageData.setItems(allItems);
         return pageData;

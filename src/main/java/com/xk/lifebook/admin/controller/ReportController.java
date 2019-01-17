@@ -28,6 +28,10 @@ public class ReportController extends BaseController {
     private SystemConfig sysCfg;
 
     private final String Base_URL = "admin/report";
+//    @Override
+    public String getBaseUrl() {
+        return Base_URL;
+    }
     /**
      * 展示统计主页
      * @return
@@ -71,14 +75,31 @@ public class ReportController extends BaseController {
      */
     @RequestMapping("/reportPage")
     public String toReportPage (HttpServletRequest request,Map<String, Object> map){
-        String name = "";
+/*        String name = "";
         Integer userId = (Integer)request.getSession(true).getAttribute("userId");
         String[] parmsName = {"type","month"};
         Map<String,Object> parms = getParms(request,parmsName);
         List<Map<String, Object>> reportList = reportService.getReportData(userId,parms);
-        map.put("reportList", reportList);
+        map.put("reportList", reportList);*/
         //获取账单统计
         return Base_URL+"/reportPage";
+    }
+
+    /**'
+     * Ajax 获取账单统计数据
+     * @return
+     */
+    @RequestMapping("/reportPageData")
+    @ResponseBody
+    public Map<String,Object> getReportPageData(HttpServletRequest request){
+        String name = "";
+        Map<String,Object> result = new HashMap<String,Object>();
+        Integer userId = (Integer)request.getSession(true).getAttribute("userId");
+        String[] parmsName = {"type","month"};
+        Map<String,Object> parms = getParms(request,parmsName);
+        List<Map<String, Object>> reportList = reportService.getReportData(userId,parms);
+        result.put("reportList", reportList);
+        return result;
     }
 
 }

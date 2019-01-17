@@ -5,26 +5,19 @@ function setType(){
     //选择“无”时，可以选择类型
     if(fid!=""){
         type = $("#foption_"+fid).attr("optType");
-        if(type == 0){
-            $("input[name='type']:eq(0)").attr("checked",'checked');
-            $("input[name='type']:eq(0)").parent().addClass("am-active");
-            $("input[name='type']:eq(0)").parent().removeAttr("disabled");
-            $("input[name='type']:eq(1)").removeAttr("checked");
-            $("input[name='type']:eq(1)").parent().removeClass("am-active");
-            $("input[name='type']:eq(1)").parent().attr("disabled",'disabled');
-        }else if(type == 1){
-            $("input[name='type']:eq(0)").removeAttr("checked");
-            $("input[name='type']:eq(0)").parent().removeClass("am-active");
-            $("input[name='type']:eq(0)").parent().attr("disabled",'disabled');
-
-            $("input[name='type']:eq(1)").attr("checked",'checked');
-            $("input[name='type']:eq(1)").parent().addClass("am-active");
-            $("input[name='type']:eq(1)").parent().removeAttr("disabled");
-        }else{
-            alert("Data Error!!!");
-        }
+        $("input[name='type']:eq("+type+")").attr("checked",'checked');
+        $("input[name='type']:eq("+type+")").parent().addClass("am-active");
+        $("input[name='type']:eq("+type+")").parent().removeAttr("disabled");
+        $("input[name='type']").each(function (){
+            if($(this).val()!=type){
+                $(this).removeAttr("checked");
+                $(this).parent().removeClass("am-active");
+                $(this).parent().attr("disabled",'disabled');
+            }
+        });
     }else{
-        $("input[name='type']:eq(0)").parent().removeAttr("disabled");
-        $("input[name='type']:eq(1)").parent().removeAttr("disabled");
+        $("input[name='type']").each(function (){
+            $(this).parent().removeAttr("disabled");
+        });
     }
 }

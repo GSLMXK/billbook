@@ -17,7 +17,10 @@ public class PlanMgrService extends BaseService<Plan> {
     private final String TABLE = "lb_plan";
     @Autowired
     PlanMgrMapper planMgrMapper;
-
+    @Override
+    public String getTable() {
+        return TABLE;
+    }
     public List findByList(){
         return planMgrMapper.findByList(TABLE);
     }
