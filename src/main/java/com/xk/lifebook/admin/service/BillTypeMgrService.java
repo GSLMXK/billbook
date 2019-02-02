@@ -1,6 +1,7 @@
 package com.xk.lifebook.admin.service;
 
 import com.github.pagehelper.PageHelper;
+import com.xk.lifebook.admin.common.base.mapper.BaseMapper;
 import com.xk.lifebook.admin.common.base.model.PageBean;
 import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.mapper.BillTypeMgrMapper;
@@ -16,7 +17,13 @@ import java.util.Map;
 public class BillTypeMgrService extends BaseService<BillType> {
     private final String TABLE = "lb_billType";
     @Autowired
-    BillTypeMgrMapper billTypeMgrMapper;
+    private BillTypeMgrMapper billTypeMgrMapper;
+
+    @Override
+    public BaseMapper getMapper() {
+        return billTypeMgrMapper;
+    }
+
     @Override
     public String getTable() {
         return TABLE;
@@ -32,7 +39,7 @@ public class BillTypeMgrService extends BaseService<BillType> {
             BillType model = plist.get(i);
             childCondition = TABLE+" WHERE creator_id = "+userId+" and f_id ="+model.getId()+" ORDER BY f_id DESC";
             parmName = model.getName();
-            map.put(parmName,billTypeMgrMapper.findByList(childCondition));
+            map.put(parmName, billTypeMgrMapper.findByList(childCondition));
         }
         return map;
     }

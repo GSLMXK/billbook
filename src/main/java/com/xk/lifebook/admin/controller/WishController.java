@@ -2,6 +2,7 @@ package com.xk.lifebook.admin.controller;
 
 import com.xk.lifebook.admin.common.base.controller.BaseController;
 import com.xk.lifebook.admin.common.base.model.PageBean;
+import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.model.Wish;
 import com.xk.lifebook.admin.service.WishService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,18 @@ import java.util.Map;
 @RequestMapping("/Wish")
 public class WishController extends BaseController<Wish> {
     private final String Base_URL = "admin/wish/";
-//    @Override
+
+    //    @Override
     public String getBaseUrl() {
         return Base_URL;
     }
     @Autowired
     WishService wishService;
+    @Override
+    public BaseService<Wish> getSevice() {
+        return wishService;
+    }
+
 
     @RequestMapping("/list")
     public String findAll(HttpServletRequest request, Map<String, Object> map, Integer currentPage, Integer pageSize) {

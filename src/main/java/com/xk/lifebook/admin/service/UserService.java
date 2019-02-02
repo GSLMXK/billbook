@@ -1,5 +1,6 @@
 package com.xk.lifebook.admin.service;
 
+import com.xk.lifebook.admin.common.base.mapper.BaseMapper;
 import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.mapper.UserMapper;
 import com.xk.lifebook.admin.model.User;
@@ -13,13 +14,19 @@ import java.util.Map;
 public class UserService extends BaseService {
     private final String TABLE = "lb_user";
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
+
+    @Override
+    public BaseMapper getMapper() {
+        return userMapper;
+    }
+
     @Override
     public String getTable() {
         return TABLE;
     }
     public User selectUser(int id) {
-        return (User)userMapper.findById(new User().getColumn(),TABLE,id);
+        return (User) userMapper.findById(new User().getColumn(),TABLE,id);
     }
 
     public User findById(int id) {

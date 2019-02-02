@@ -27,10 +27,11 @@
             <ul class="am-list admin-content-file">
                 <#list page.items as item>
                     <li>
-                        <strong><span class="am-icon-upload"></span> ${item.name}</strong>
+                        <strong><span class="am-icon-upload"></span> ${item.name}<#if item.is_finished != 0>(已完成)</#if></strong>
                         <#if item.is_finished == 0>
                             <button type="button" onclick="openModal('add-modal',getWish(${item.id}),null)" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 分配</button>
                             <button type="button" onclick="finishWish(${item.id})" class="am-btn am-btn-default"><span class="am-icon-check"></span> 完成</button>
+                            <button type="button" onclick="delM(${item.id})" class="am-btn am-btn-default"><span class="am-icon-check"></span> 删除</button>
                         </#if>
                         <p>${item.money_in}/${item.money}</p>
                         <#if item.is_finished == 0>
@@ -72,7 +73,7 @@
                         备注
                     </div>
                     <div class="am-u-sm-9">
-                        <p><textarea type="text" id="wishComment" name="comment" value="" class="am-form-field" ></textarea></p>
+                        <p><textarea type="text" id="wishComment" rows="5" name="comment" value="" class="am-form-field" ></textarea></p>
                     </div>
                     <input type="hidden" id="isFinished" name="isFinished" value="0" />
                     <input type="hidden" id="wishId" name="id" value="" />

@@ -2,6 +2,7 @@ package com.xk.lifebook.admin.controller;
 
 import com.xk.lifebook.admin.common.base.controller.BaseController;
 import com.xk.lifebook.admin.common.base.model.PageBean;
+import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.model.BillType;
 import com.xk.lifebook.admin.service.BillTypeMgrService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,19 @@ import java.util.Map;
 public class BillTypeMgrController extends BaseController<BillType> {
 
     private final String Base_URL = "admin/billTypeMgr/";
-//    @Override
+
+    //    @Override
     public String getBaseUrl() {
         return Base_URL;
     }
+
     @Autowired
     BillTypeMgrService billTypeMgrService;
 
+    @Override
+    public BaseService<BillType> getSevice() {
+        return billTypeMgrService;
+    }
     public Map<String,Object> getTypeList(HttpServletRequest request) {
         int id = (Integer) request.getSession(true).getAttribute("userId");
         return billTypeMgrService.findByList(id);

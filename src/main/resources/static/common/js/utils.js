@@ -83,6 +83,10 @@ function edit(id){
 function del(id){
     window.location.href="delete/"+id;
 }
+//删除
+function delM(id){
+    window.location.href="delModel/"+id;
+}
 //查找
 function search(id){
     window.location.href="list/"+id;

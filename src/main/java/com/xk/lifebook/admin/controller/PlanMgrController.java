@@ -2,6 +2,7 @@ package com.xk.lifebook.admin.controller;
 
 import com.xk.lifebook.admin.common.base.controller.BaseController;
 import com.xk.lifebook.admin.common.base.model.PageBean;
+import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.model.Plan;
 import com.xk.lifebook.admin.service.BillTypeMgrService;
 import com.xk.lifebook.admin.service.PlanMgrService;
@@ -18,12 +19,18 @@ import java.util.Map;
 @RequestMapping("/PlanMgr")
 public class PlanMgrController extends BaseController<Plan> {
     private final String Base_URL = "admin/planMgr/";
-//    @Override
+    @Autowired
+    PlanMgrService planService;
+    @Override
+    public BaseService<Plan> getSevice() {
+        return planService;
+    }
+
+    //    @Override
     public String getBaseUrl() {
         return Base_URL;
     }
-    @Autowired
-    PlanMgrService planService;
+
     @Autowired
     BillTypeMgrService billTypeMgrService;
     @RequestMapping("/list")

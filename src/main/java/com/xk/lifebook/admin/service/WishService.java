@@ -1,16 +1,14 @@
 package com.xk.lifebook.admin.service;
 
 import com.github.pagehelper.PageHelper;
+import com.xk.lifebook.admin.common.base.mapper.BaseMapper;
 import com.xk.lifebook.admin.common.base.model.PageBean;
 import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.mapper.WishMapper;
-import com.xk.lifebook.admin.model.Bill;
 import com.xk.lifebook.admin.model.Wish;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Map;
@@ -18,12 +16,18 @@ import java.util.Map;
 @Repository
 public class WishService  extends BaseService<Wish> {
     private final String TABLE = "lb_wish";
+    @Autowired
+    private WishMapper wishMapper;
+    @Override
+    public BaseMapper getMapper() {
+        return wishMapper;
+    }
+
     @Override
     public String getTable() {
         return TABLE;
     }
-    @Autowired
-    WishMapper wishMapper;
+
     public PageBean<Map<String,Object>> findByPage(int currentPage, int pageSize, int id, Map<String,Object> parms) {
         String selectParm = "w.*";
         String tableParm = "lb_wish w";
@@ -46,7 +50,7 @@ public class WishService  extends BaseService<Wish> {
         }
         return condition.toString();
     }
-    //获取月收支信息
+    //获取所有存款信息
     public List<Map<String,Object>> getCountData(Integer id,String month){
         String selectParm = "convert(sum(bill.money),decimal(20,2)) all_save, convert((select SUM(money_in) from lb_wish where creator_id = "+id+"),decimal(20,2)) used";
         String table = "lb_bill bill LEFT JOIN lb_billType type on bill.billType_id = type.id";

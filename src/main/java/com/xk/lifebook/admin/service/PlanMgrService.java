@@ -1,6 +1,7 @@
 package com.xk.lifebook.admin.service;
 
 import com.github.pagehelper.PageHelper;
+import com.xk.lifebook.admin.common.base.mapper.BaseMapper;
 import com.xk.lifebook.admin.common.base.model.PageBean;
 import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.mapper.PlanMgrMapper;
@@ -16,7 +17,13 @@ import java.util.Map;
 public class PlanMgrService extends BaseService<Plan> {
     private final String TABLE = "lb_plan";
     @Autowired
-    PlanMgrMapper planMgrMapper;
+    private PlanMgrMapper planMgrMapper;
+
+    @Override
+    public BaseMapper getMapper() {
+        return planMgrMapper;
+    }
+
     @Override
     public String getTable() {
         return TABLE;
@@ -27,7 +34,7 @@ public class PlanMgrService extends BaseService<Plan> {
 
     public Plan findById(int id) {
         String selectParm = "id,name,create_date createDate";
-        return (Plan) planMgrMapper.findById(selectParm,TABLE,id);
+        return (Plan) findById(selectParm,id);
     }
     //查询计划明细项
     public List<Map<String,Object>> findDetails(Integer id){

@@ -2,6 +2,7 @@ package com.xk.lifebook.admin.controller;
 
 import com.xk.lifebook.admin.common.base.controller.BaseController;
 import com.xk.lifebook.admin.common.base.model.PageBean;
+import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.model.Bill;
 import com.xk.lifebook.admin.service.BillManagerService;
 import com.xk.lifebook.admin.service.BillTypeMgrService;
@@ -29,7 +30,12 @@ public class BillManagerController extends BaseController<Bill> {
     @Autowired
     BillTypeMgrService billTypeMgrService;
 
-//    @Override
+    @Override
+    public BaseService<Bill> getSevice() {
+        return billmgrService;
+    }
+
+    //    @Override
     public String getBaseUrl() {
         return Base_URL;
     }

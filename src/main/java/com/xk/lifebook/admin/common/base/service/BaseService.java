@@ -17,9 +17,8 @@ import java.util.Map;
 @Repository
 public abstract class BaseService<E> {
 
-//    @Autowired
-//    private BaseMapper baseMapper;
-
+    //获取Mapper
+    public abstract BaseMapper getMapper();
     public abstract String getTable();
 
     /**
@@ -28,38 +27,51 @@ public abstract class BaseService<E> {
      * @param id
      * @return
      */
-//    public E findById(int id) {
-//        return (E) baseMapper.findById("*", getTable(), id);
-//    }
+    public E findById(int id) {
+        return (E) getMapper().findById("*", getTable(), id);
+    }
+
+    /**
+     * 查找实体
+     *
+     * @param id
+     * @return
+     */
+    public E findById(String colums,int id) {
+        return (E) getMapper().findById(colums, getTable(), id);
+    }
+    public List<E> findByList(String condition) {
+        return getMapper().findByList(condition);
+    }
 
     //插入新数据
-//    public Integer insertData(Map<String, Object> model) {
-//        StringBuffer colums = new StringBuffer();
-//        StringBuffer values = new StringBuffer();
-//        for (Map.Entry<String, Object> entry : model.entrySet()) {
-//            colums.append(entry.getKey() + ",");
-////            if () {
-////
-////            }
-//        }
+    public Integer insertData(Map<String, Object> model) {
+        StringBuffer colums = new StringBuffer();
+        StringBuffer values = new StringBuffer();
+        for (Map.Entry<String, Object> entry : model.entrySet()) {
+            colums.append(entry.getKey() + ",");
+//            if () {
 //
-//        return baseMapper.insertByParm(getTable(), colums.toString(), values.toString());
-//    }
+//            }
+        }
+
+        return getMapper().insertByParm(getTable(), colums.toString(), values.toString());
+    }
 
     //修改
-//    public Integer update(Map<String, Object> model) {
-//        StringBuffer colums = new StringBuffer();
-//        StringBuffer values = new StringBuffer();
-//        Integer id = null;
-//        //组装修改sql
-//        for (Map.Entry<String, Object> entry : model.entrySet()) {
-//            colums.append(entry.getKey() +"="+ entry.getValue());
+    public Integer update(Map<String, Object> model) {
+        StringBuffer colums = new StringBuffer();
+        StringBuffer values = new StringBuffer();
+        Integer id = null;
+        //组装修改sql
+        for (Map.Entry<String, Object> entry : model.entrySet()) {
+            colums.append(entry.getKey() +"="+ entry.getValue());
+        }
+//        if(id==null){
+//            return 0;
 //        }
-////        if(id==null){
-////            return 0;
-////        }
-//        return baseMapper.updateEntity(getTable(), colums.toString(), id);
-//    }
+        return getMapper().updateEntity(getTable(), colums.toString(), id);
+    }
 
     /**
      * 分页查询
@@ -70,18 +82,18 @@ public abstract class BaseService<E> {
      * @param parms
      * @return
      */
-//    public PageBean<Map<String, Object>> findByPage(int currentPage, int pageSize, int id, Map<String, Object> parms) {
-//        String selectParm = "*";
-//        String tableParm = getTable();
-//        String condition = combineCondition(parms);
-//        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
-//        PageHelper.startPage(currentPage, pageSize);
-//        List<Map<String, Object>> allItems = baseMapper.findByParm(tableParm, selectParm, condition);        //全部账单
-//        int countNums = baseMapper.countList(tableParm, condition);            //总记录数
-//        PageBean<Map<String, Object>> pageData = new PageBean<Map<String, Object>>(currentPage, pageSize, countNums);
-//        pageData.setItems(allItems);
-//        return pageData;
-//    }
+    public PageBean<Map<String, Object>> findByPage(int currentPage, int pageSize, int id, Map<String, Object> parms) {
+        String selectParm = "*";
+        String tableParm = getTable();
+        String condition = combineCondition(parms);
+        //设置分页信息，分别是当前页数和每页显示的总记录数【记住：必须在mapper接口中的方法执行之前设置该分页信息】
+        PageHelper.startPage(currentPage, pageSize);
+        List<Map<String, Object>> allItems = getMapper().findByParm(tableParm, selectParm, condition);        //全部账单
+        int countNums = getMapper().countList(tableParm, condition);            //总记录数
+        PageBean<Map<String, Object>> pageData = new PageBean<Map<String, Object>>(currentPage, pageSize, countNums);
+        pageData.setItems(allItems);
+        return pageData;
+    }
 
     /**
      * 删除
@@ -89,9 +101,9 @@ public abstract class BaseService<E> {
      * @param id
      * @return
      */
-//    public Integer delById(int id) {
-//        return baseMapper.delById(getTable(), id);
-//    }
+    public Integer delById(int id) {
+        return getMapper().delById(getTable(), id);
+    }
 
     /**
      * 组装update Sql

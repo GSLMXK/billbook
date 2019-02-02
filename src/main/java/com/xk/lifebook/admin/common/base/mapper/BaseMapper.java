@@ -1,5 +1,6 @@
 package com.xk.lifebook.admin.common.base.mapper;
 
+import com.xk.lifebook.admin.common.base.model.BaseModel;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

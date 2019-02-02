@@ -2,6 +2,7 @@ package com.xk.lifebook.admin.controller;
 
 import com.xk.lifebook.admin.common.base.controller.BaseController;
 import com.xk.lifebook.admin.common.base.model.ServerInfoVo;
+import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.common.utils.SystemConfig;
 import com.xk.lifebook.admin.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,13 @@ public class ReportController extends BaseController {
     private SystemConfig sysCfg;
 
     private final String Base_URL = "admin/report";
-//    @Override
+
+    @Override
+    public BaseService getSevice() {
+        return reportService;
+    }
+
+    //    @Override
     public String getBaseUrl() {
         return Base_URL;
     }

@@ -1,6 +1,7 @@
 package com.xk.lifebook.admin.service;
 
 import com.github.pagehelper.PageHelper;
+import com.xk.lifebook.admin.common.base.mapper.BaseMapper;
 import com.xk.lifebook.admin.common.base.model.PageBean;
 import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.mapper.NoticeMapper;
@@ -14,7 +15,13 @@ import java.util.List;
 public class NoticeService extends BaseService<Notice> {
     private final String TABLE = "lb_notice";
     @Autowired
-    NoticeMapper noticeMapper;
+    private NoticeMapper noticeMapper;
+
+    @Override
+    public BaseMapper getMapper() {
+        return noticeMapper;
+    }
+
     @Override
     public String getTable() {
         return TABLE;
@@ -25,7 +32,7 @@ public class NoticeService extends BaseService<Notice> {
 
     public Notice findById(int id) {
         String selectParm = "id,name,content,create_date createDate";
-        return (Notice) noticeMapper.findById(selectParm,TABLE,id);
+        return (Notice) findById(selectParm,id);
     }
 
     public PageBean<Notice> findByPage(int currentPage, int pageSize, int id) {

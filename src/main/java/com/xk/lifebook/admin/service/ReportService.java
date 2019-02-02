@@ -1,5 +1,6 @@
 package com.xk.lifebook.admin.service;
 
+import com.xk.lifebook.admin.common.base.mapper.BaseMapper;
 import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.mapper.ReportMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,13 @@ import java.util.Map;
 public class ReportService extends BaseService {
     private final String TABLE = "";
     @Autowired
-    ReportMapper reportMapper;
+    private ReportMapper reportMapper;
+
+    @Override
+    public BaseMapper getMapper() {
+        return reportMapper;
+    }
+
     @Override
     public String getTable() {
         return TABLE;

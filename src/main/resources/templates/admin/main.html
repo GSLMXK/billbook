@@ -10,14 +10,16 @@
         }
     }
 
-    window.onresize=function(){
-        changeFrameHeight();
-    }
-    $(function(){changeFrameHeight();});
+    // window.onresize=function(){
+    //     changeFrameHeight();
+    // }
+    // $(function(){changeFrameHeight();});
 </script>
 <#include "/admin/top.html">
 <#include "/admin/left.html">
+<div>
 <iframe src="/Report/homePage" name="rightFrame" frameborder="0" noresize="noresize" id="rightFrame" ></iframe>
+</div>
 <#include "/admin/foot.html">
 <!--<frameset cols="14%,86%" frameborder="0" border="0" framespacing="0">
     <frame src="left.jsp" name="leftFrame" noresize="noresize" id="leftFrame" />

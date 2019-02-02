@@ -2,6 +2,7 @@ package com.xk.lifebook.admin.controller;
 
 import com.xk.lifebook.admin.common.base.controller.BaseController;
 import com.xk.lifebook.admin.common.base.model.PageBean;
+import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.model.Notice;
 import com.xk.lifebook.admin.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,17 @@ import java.util.Map;
 @RequestMapping("/Notice")
 public class NoticeController extends BaseController<Notice> {
     private final String Base_URL = "admin/notice/";
-//    @Override
+
+    //    @Override
     public String getBaseUrl() {
         return Base_URL;
     }
     @Autowired
     NoticeService noticeService;
-
+    @Override
+    public BaseService<Notice> getSevice() {
+        return noticeService;
+    }
     @RequestMapping("/list")
     public String findAll(Map<String, Object> map, Integer currentPage, Integer pageSize) {
         int id = 1;

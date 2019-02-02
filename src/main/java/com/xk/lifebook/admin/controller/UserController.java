@@ -1,6 +1,7 @@
 package com.xk.lifebook.admin.controller;
 
 import com.xk.lifebook.admin.common.base.controller.BaseController;
+import com.xk.lifebook.admin.common.base.service.BaseService;
 import com.xk.lifebook.admin.model.User;
 import com.xk.lifebook.admin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,13 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
     private final String Base_URL = "admin/user";
-//    @Override
+
+    @Override
+    public BaseService getSevice() {
+        return userService;
+    }
+
+    //    @Override
     public String getBaseUrl() {
         return Base_URL;
     }
