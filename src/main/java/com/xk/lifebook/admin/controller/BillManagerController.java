@@ -39,6 +39,12 @@ public class BillManagerController extends BaseController<Bill> {
     public String getBaseUrl() {
         return Base_URL;
     }
+
+    @Override
+    public String getControllerName() {
+        return "BillMgr";
+    }
+
     @RequestMapping("/{id}")
     public Bill findById (@PathVariable int id){
         return (Bill)billmgrService.findById(id);

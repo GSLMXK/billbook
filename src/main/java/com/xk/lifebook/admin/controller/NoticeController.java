@@ -21,6 +21,12 @@ public class NoticeController extends BaseController<Notice> {
     public String getBaseUrl() {
         return Base_URL;
     }
+
+    @Override
+    public String getControllerName() {
+        return "Notice";
+    }
+
     @Autowired
     NoticeService noticeService;
     @Override

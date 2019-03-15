@@ -30,6 +30,11 @@ public class BillTypeMgrController extends BaseController<BillType> {
         return Base_URL;
     }
 
+    @Override
+    public String getControllerName() {
+        return "BillType";
+    }
+
     @Autowired
     BillTypeMgrService billTypeMgrService;
 

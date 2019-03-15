@@ -24,15 +24,25 @@ public class BillInterfaceController {
     @Autowired
     BillTypeMgrService billTypeMgrService;
     /**'
-     * Ajax 获取当月账单统计数据
+     * 获取当月账单统计数据
      * @return
      */
     @RequestMapping("/countData")
     @ResponseBody
-    public Map<String,Object> getPageData(HttpServletRequest request){
+    public Map<String,Object> getPageData(HttpServletRequest request,Integer id, String searchDate){
         Map<String,Object> result = new HashMap<String,Object>();
-        Integer id = (Integer)request.getSession(true).getAttribute("userId");
-        result.put("moneyOI",billmgrService.getMonthData(id,request.getParameter("searchDate")));
+        result.put("moneyOI",billmgrService.getMonthData(id,searchDate));
         return result;
+    }
+
+    /**'
+     * 获取账单类型
+     * @return
+     */
+    @RequestMapping("/getBillType")
+    @ResponseBody
+    public Map<String,Object> getBillType(HttpServletRequest request,Integer userId){
+        Map<String,Object> typeList = billTypeMgrService.findByList(userId);
+        return typeList;
     }
 }

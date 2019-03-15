@@ -31,6 +31,11 @@ public class PlanMgrController extends BaseController<Plan> {
         return Base_URL;
     }
 
+    @Override
+    public String getControllerName() {
+        return "Plan";
+    }
+
     @Autowired
     BillTypeMgrService billTypeMgrService;
     @RequestMapping("/list")

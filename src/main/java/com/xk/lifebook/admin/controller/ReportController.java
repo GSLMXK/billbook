@@ -39,6 +39,12 @@ public class ReportController extends BaseController {
     public String getBaseUrl() {
         return Base_URL;
     }
+
+    @Override
+    public String getControllerName() {
+        return "Report";
+    }
+
     /**
      * 展示统计主页
      * @return

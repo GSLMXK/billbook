@@ -1,24 +1,13 @@
-<script>
-    function changeFrameHeight(){
-        var ifm= document.getElementById("rightFrame");
-        var topHeight = $("#topbar-collapse").height();
-        ifm.height=document.documentElement.clientHeight-topHeight;
-        var leftWidth = $(".admin-sidebar").width();
-        ifm.width=document.documentElement.clientWidth-leftWidth-1;
-        if(ifm.width < 890){
-            ifm.width = 890;
-        }
+<style>
+    #rightFrame{
+        position:fixed;
+        width:85%;
     }
-
-    // window.onresize=function(){
-    //     changeFrameHeight();
-    // }
-    // $(function(){changeFrameHeight();});
-</script>
+</style>
 <#include "/admin/top.html">
 <#include "/admin/left.html">
 <div>
-<iframe src="/Report/homePage" name="rightFrame" frameborder="0" noresize="noresize" id="rightFrame" ></iframe>
+<iframe src="/Report/homePage" name="rightFrame" frameborder="0" width='100%' height='100%' id="rightFrame" ></iframe>
 </div>
 <#include "/admin/foot.html">
 <!--<frameset cols="14%,86%" frameborder="0" border="0" framespacing="0">

@@ -34,6 +34,11 @@ public class UserController extends BaseController {
         return Base_URL;
     }
 
+    @Override
+    public String getControllerName() {
+        return "User";
+    }
+
     @RequestMapping("/{id}")
     public String selectUser (@PathVariable int id){
         return userService.selectUser(id).toString();

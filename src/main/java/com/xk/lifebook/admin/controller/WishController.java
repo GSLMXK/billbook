@@ -30,6 +30,12 @@ public class WishController extends BaseController<Wish> {
     public String getBaseUrl() {
         return Base_URL;
     }
+
+    @Override
+    public String getControllerName() {
+        return "Wish";
+    }
+
     @Autowired
     WishService wishService;
     @Override
@@ -61,14 +67,9 @@ public class WishController extends BaseController<Wish> {
         result.put("wish", wish);
         return result;
     }
-
     @RequestMapping("/delete/{id}")
-    public String delData (Map<String, Object> map, @PathVariable int id){
-        Integer result = wishService.delById(id);
-        if(result!=null&&result>0){
-            return "redirect:/Wish/list";
-        }
-        return toError();
+    public String deleteWish (Map<String, Object> map, @PathVariable int id){
+        return delData(map, id);
     }
     /**'
      * Ajax 获取当月账单统计数据

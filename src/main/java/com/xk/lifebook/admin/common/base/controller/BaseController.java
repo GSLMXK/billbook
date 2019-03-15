@@ -16,13 +16,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 @Controller
-@RequestMapping("/")
 public abstract class BaseController<E> {
     public abstract BaseService<E> getSevice();
     private final String ERROR_URL = "admin/error";
     private NormalUtils normalUtils = new NormalUtils();
     //获取基础路径
     public abstract String getBaseUrl();
+    //获取子类控制器名
+    public abstract String getControllerName();
     /**
      * 在配置文件中配置的文件保存路径
      */
@@ -57,7 +58,6 @@ public abstract class BaseController<E> {
     public Date getNowDateShort(){
         return normalUtils.getNowDateShort();
     }
-    @RequestMapping("/findList")
     public String findAll (HttpServletRequest request, Map<String, Object> map, Integer currentPage, Integer pageSize){
         int id = (Integer) request.getSession(true).getAttribute("userId");
         if(currentPage == null){
@@ -74,43 +74,38 @@ public abstract class BaseController<E> {
         map.put("parms",parms);
         return getBaseUrl()+"list";
     }
-    @RequestMapping("/addModel")
     public String toAddPage (HttpServletRequest request, Map<String, Object> map){
         return getBaseUrl()+"add";
     }
 
-    @RequestMapping("/editModel/{id}")
     public String toEditPage (HttpServletRequest request, Map<String, Object> map, @PathVariable int id){
         E model = getSevice().findById(id);
         map.put("model", model);
         return getBaseUrl()+"edit";
     }
 
-    @RequestMapping("/delModel/{id}")
     public String delData (Map<String, Object> map, @PathVariable int id){
         Integer result = getSevice().delById(id);
         if(result!=null&&result>0){
-            return "redirect:"+getBaseUrl()+"list";
+            return "redirect:/"+getControllerName()+"/list";
         }
         return toError();
     }
 
-    @RequestMapping("/saveModel")
-    public String save (HttpServletRequest request,Map<String, Object> model){
+    public String saveModel (HttpServletRequest request,Map<String, Object> model){
         Integer result = 0;
         int userId = (Integer) request.getSession(true).getAttribute("userId");
         result = getSevice().insertData(model);
         if(result!=null&&result>0){
-            return "redirect:"+getBaseUrl()+"list";
+            return "redirect:/"+getControllerName()+"/list";
         }
         return toError();
     }
-    @RequestMapping("/updateModel")
     public String updateModel (Map<String, Object> model){
         Integer result = 0;
         result = getSevice().update(model);
         if(result!=null&&result>0){
-            return "redirect:"+getBaseUrl()+"list";
+            return "redirect:/"+getControllerName()+"/list";
         }
         return toError();
     }
