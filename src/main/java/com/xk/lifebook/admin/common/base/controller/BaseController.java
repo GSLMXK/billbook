@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,7 +90,7 @@ public abstract class BaseController<E> {
         }
         return toError();
     }
-
+    @RequestMapping("/saveModel")
     public String saveModel (HttpServletRequest request,Map<String, Object> model){
         Integer result = 0;
         int userId = (Integer) request.getSession(true).getAttribute("userId");
@@ -101,6 +100,7 @@ public abstract class BaseController<E> {
         }
         return toError();
     }
+    @RequestMapping("/updateModel")
     public String updateModel (Map<String, Object> model){
         Integer result = 0;
         result = getSevice().update(model);

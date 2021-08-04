@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class WishService  extends BaseService<Wish> {
+public class WishService extends BaseService<Wish> {
     private final String TABLE = "lb_wish";
     @Autowired
     private WishMapper wishMapper;

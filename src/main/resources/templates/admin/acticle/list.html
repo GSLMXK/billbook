@@ -71,16 +71,16 @@
                             <td>${bill_index+1}</td>
                             <td><a href="#">${bill.name}</a></td>
                             <td>${bill.typeName}</td>
-                            <td>${bill.money?c}</td>
+                            <td>${bill.money}</td>
                             <td>${bill.creatorName}</td>
                             <td>${bill.billDate?string('yyyy-MM-dd')}</td>
                             <td>
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button type="button" onclick="edit(${bill.id?c})" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                        <button type="button" onclick="edit(${bill.id})" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </button>
-                                        <button type="button" onclick="del(${bill.id?c})" class="am-btn am-btn-default am-btn-xs am-text-danger"><span
+                                        <button type="button" onclick="del(${bill.id})" class="am-btn am-btn-default am-btn-xs am-text-danger"><span
                                                 class="am-icon-trash-o"></span> 删除
                                         </button>
                                     </div>

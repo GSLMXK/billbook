@@ -1,9 +1,9 @@
 package com.xk.lifebook.admin.common.utils;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.DatabaseMetaData;
+//import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.DatabaseMetaData;
 import com.xk.lifebook.admin.common.base.model.ServerInfoVo;
-import org.hyperic.sigar.*;
+import org.hyperic.sigar.Sigar;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.sql.DriverManager;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Properties;
+import java.util.TimeZone;
 
 @Component
 public class SystemConfig {
@@ -147,12 +150,12 @@ public class SystemConfig {
         try{
             serverInfoVo.setJdbcUrl(dataUrl);
             Class.forName(dataDriver);
-            Connection con = (Connection) DriverManager.getConnection(dataUrl,dataUser,dataPwd);
-            DatabaseMetaData metaData = (DatabaseMetaData) con.getMetaData();
-            serverInfoVo.setDatabaseType(metaData.getDatabaseProductName());
-            serverInfoVo.setDatabaseVersion(metaData.getDatabaseProductVersion());
-            serverInfoVo.setDatabaseDriver(metaData.getDriverName());
-            serverInfoVo.setDriverVersion(metaData.getDriverVersion());
+//            Connection con = (Connection) DriverManager.getConnection(dataUrl,dataUser,dataPwd);
+//            DatabaseMetaData metaData = (DatabaseMetaData) con.getMetaData();
+//            serverInfoVo.setDatabaseType(metaData.getDatabaseProductName());
+//            serverInfoVo.setDatabaseVersion(metaData.getDatabaseProductVersion());
+//            serverInfoVo.setDatabaseDriver(metaData.getDriverName());
+//            serverInfoVo.setDriverVersion(metaData.getDriverVersion());
         }catch(Exception e){
             e.printStackTrace();
         }
